@@ -20,6 +20,12 @@ services:
         value: https://api.deepseek.com
       - key: LLM_MODEL
         value: deepseek-chat
+      - key: ASR_API_KEY
+        sync: false
+      - key: ASR_BASE_URL
+        value: https://api.siliconflow.cn/v1
+      - key: ASR_MODEL
+        value: FunAudioLLM/SenseVoiceSmall
       - key: ACCESS_CODE
         generateValue: true
       - key: DAILY_LIMIT

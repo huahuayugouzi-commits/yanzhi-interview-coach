@@ -10,7 +10,7 @@
 2. Render 选择 New → Blueprint，连接该仓库并核对创建的是 Free Web Service。若方案要求收费，停止并返回检查配置。
 3. 配置 LLM_API_KEY。默认 DeepSeek；若本地使用其他服务，同步 LLM_BASE_URL 和 LLM_MODEL。
 4. ACCESS_CODE 会随机生成；在服务 Environment 中查看并私下发给试用者，不能使用模型密钥当口令。生产环境缺少至少 12 字符口令时会拒绝启动。
-5. 可选配置 ASR_API_KEY、ASR_BASE_URL、ASR_MODEL；没有语音凭证时保留文字输入和录音回听模式，不显示已完成转录。
+5. Blueprint 会同时要求配置 ASR_API_KEY，默认使用 SiliconFlow 的 FunAudioLLM/SenseVoiceSmall。填入本地已验收的语音密钥；不要上传 .env。手工创建服务时也要添加 ASR_BASE_URL=https://api.siliconflow.cn/v1 和 ASR_MODEL=FunAudioLLM/SenseVoiceSmall。没有语音凭证时仍可使用文字输入和录音回听。
 6. 首次部署完成后，检查 HTTPS 地址的 /api/health，然后验证无口令不能调用训练 API、正确口令可完成真实训练。
 
 如手工创建 Web Service：
