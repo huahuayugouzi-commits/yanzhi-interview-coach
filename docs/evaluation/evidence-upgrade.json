@@ -1,0 +1,155 @@
+{
+  "run_at": "2026-11-17T08:03:17.294Z",
+  "note": "真实模型小样本；语义审核为 Codex 自审，不代表用户验证。",
+  "cases": [
+    {
+      "id": "work-list",
+      "expected": "needs_retry",
+      "answer": "我负责 Growth Copilot 项目，面向小红书知识型创作者，解决选题难、内容吸引力不足和持续创作成本高。我负责需求分析、MVP规划、PRD、Prompt、结构化输出与证据溯源，基于开源项目二次开发，用Codex推进实现，设计Bad Case回归测试。针对选题同质化和幻觉分别给出方案，V0.1完成端到端验证和自动化回归测试，下一步种子用户测试。",
+      "output": {
+        "status": "needs_retry",
+        "heard": "你介绍了 Growth Copilot 项目，面向小红书知识型创作者，解决选题难、内容吸引力不足和持续创作成本高的问题；你负责需求分析、MVP 规划、PRD、Prompt、结构化输出与证据溯源，并基于开源项目二次开发、用 Codex 推进实现、设计 Bad Case 回归测试。",
+        "capability_focus": "AI 产品经理的项目负责与关键决策证据",
+        "evidence_assessment": {
+          "level": "partial",
+          "reason": "回答列出了项目目标、你的职责范围和 V0.1 完成端到端验证与自动化回归测试，但针对选题同质化和幻觉的“方案”只有结论，没有说明你具体做了什么决策、如何设计，因此无法判断你的产品判断与落地能力。"
+        },
+        "issue_impact": "面试官听到的是职责清单和结果结论，缺少你针对核心问题做出的具体产品设计或决策，难以判断你在项目中的实际主导作用。",
+        "main_issue": "针对选题同质化和幻觉，你具体设计了什么方案或做了哪些关键决策，目前没有展开。",
+        "evidence_quote": "针对选题同质化和幻觉分别给出方案，V0.1完成端到端验证和自动化回归测试",
+        "guiding_question": "针对幻觉问题，你具体设计了什么方案？",
+        "retry_hints": [
+          "选幻觉或同质化其一",
+          "讲清你的具体设计",
+          "说明为什么这样设计"
+        ]
+      }
+    },
+    {
+      "id": "specific-internal",
+      "expected": "clear",
+      "answer": "我负责知识库接入。测试账号读不到受限文档，我逐项核对请求字段，发现缺少权限字段。我补齐字段，与研发确认鉴权逻辑，随后用有权限和无权限两个测试账号复测，前者正常读取，后者仍被拒绝，内部验收通过。尚未上线给真实用户。",
+      "output": {
+        "status": "clear",
+        "heard": "用户负责知识库接入，发现测试账号读不到受限文档，逐项核对请求字段后定位到缺少权限字段，补齐并与研发确认鉴权逻辑，用有权限和无权限两个账号复测，内部验收通过，尚未上线给真实用户。",
+        "capability_focus": "定位问题、推动修复并完成验证的闭环能力",
+        "evidence_assessment": {
+          "level": "sufficient",
+          "reason": "回答具体说明了个人排查动作（逐项核对请求字段）、定位的根因（缺少权限字段）、与研发确认鉴权逻辑的协作、双账号复测的验证方式及结果（有权限正常、无权限被拒、内部验收通过），并主动说明尚未上线给真实用户的验证边界，本题关键证据已具体充分。"
+        },
+        "issue_impact": null,
+        "main_issue": null,
+        "evidence_quote": null,
+        "guiding_question": null,
+        "retry_hints": []
+      }
+    },
+    {
+      "id": "empty",
+      "expected": "insufficient",
+      "answer": "嗯，那个，嗯。",
+      "output": {
+        "status": "insufficient",
+        "heard": "回答中只有语气词，没有提供任何项目信息。",
+        "capability_focus": "项目经历与个人贡献表达",
+        "evidence_assessment": {
+          "level": "insufficient",
+          "reason": "回答仅为“嗯，那个，嗯”，无法判断项目背景、个人行动或结果，缺少本题所需的基本信息。"
+        },
+        "issue_impact": "面试官无法了解你负责过什么项目，也无法判断你的需求分析、产品设计或跨团队协作能力。",
+        "main_issue": "没有提供任何可判断的项目经历信息。",
+        "evidence_quote": "嗯，那个，嗯。",
+        "guiding_question": "能介绍一个你参与过的项目吗？",
+        "retry_hints": [
+          "选一个具体项目",
+          "说明你的角色",
+          "按时间顺序讲"
+        ]
+      }
+    },
+    {
+      "id": "unsupported-result",
+      "expected": "needs_retry",
+      "answer": "我做了AI写作助手，主要负责Prompt和PRD，效果很好，用户很满意。",
+      "output": {
+        "status": "needs_retry",
+        "heard": "你介绍了一个自己负责的 AI 写作助手项目，提到主要负责 Prompt 和 PRD，并说效果很好、用户满意。",
+        "capability_focus": "项目负责人的具体个人行动与可验证结果",
+        "evidence_assessment": {
+          "level": "partial",
+          "reason": "回答点明了项目名称和负责模块，但 Prompt 与 PRD 只停留在职责名称，没有说明你具体做了什么决策或产出，效果与用户满意也没有具体依据，因此无法判断个人贡献和结果的可信度。"
+        },
+        "issue_impact": "面试官无法从“负责 Prompt 和 PRD”看出你在项目中实际做了什么、解决了什么问题，也无法判断“效果很好”是否有可验证的支撑。",
+        "main_issue": "没有说明你在 Prompt 或 PRD 上具体做过哪一件可描述的工作。",
+        "evidence_quote": "主要负责Prompt和PRD，效果很好，用户很满意。",
+        "guiding_question": "能讲一件你亲手改过的 Prompt 或 PRD 内容吗？",
+        "retry_hints": [
+          "选一个具体改动",
+          "说明改前改后",
+          "说清你亲手做的"
+        ]
+      }
+    },
+    {
+      "id": "qualitative-result",
+      "expected": "clear",
+      "answer": "我负责客服知识库的引用展示。客服反馈答案找不到出处，我把来源链接和原文片段放在每条结论下，并针对过期文档增加提示。在内部试用中，客服能点击原文核对，指出的两条过期引用也被替换。还没有上线数据。",
+      "output": {
+        "status": "clear",
+        "heard": "你负责客服知识库的引用展示，把来源链接和原文片段放在每条结论下，并针对过期文档增加提示。内部试用中客服能点击原文核对，指出的两条过期引用也被替换，目前还没有上线数据。",
+        "capability_focus": "需求分析与产品设计，以及可验证的试用反馈闭环",
+        "evidence_assessment": {
+          "level": "sufficient",
+          "reason": "回答说明了具体问题（客服找不到出处）、你的产品设计动作（来源链接、原文片段、过期提示）以及内部试用的可验证反馈（客服能核对、两条过期引用被替换），并主动说明尚无上线数据的验证边界，足以判断本题所需的产品设计与验证能力。"
+        },
+        "issue_impact": null,
+        "main_issue": null,
+        "evidence_quote": null,
+        "guiding_question": null,
+        "retry_hints": []
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "resolved",
+      "second_answer": "我发现权限字段遗漏，亲自补齐字段，与研发确认后使用有权限和无权限两个测试账号复测，读取和拦截都符合预期。",
+      "output": {
+        "status": "improved",
+        "clearer_information": [
+          "补充了具体接入问题：权限字段遗漏",
+          "说明个人行动：亲自补齐字段并与研发确认",
+          "说明验证方式：用有权限和无权限两个测试账号复测，读取和拦截符合预期"
+        ],
+        "capability_evidence": {
+          "assessment": "more_complete",
+          "explanation": "原追问关注用户亲自解决过什么接入问题。第二答给出了具体问题（权限字段遗漏）、个人行动（补齐字段、与研发确认）和验证闭环（两个测试账号复测，读取和拦截符合预期），原缺口已解决。",
+          "first_quote": "我负责和研发协调知识库接入。",
+          "second_quote": "我发现权限字段遗漏，亲自补齐字段，与研发确认后使用有权限和无权限两个测试账号复测，读取和拦截都符合预期。"
+        },
+        "remaining_improvement": null
+      }
+    },
+    {
+      "id": "repeated",
+      "second_answer": "我主要就是协调研发，积极推动知识库接入。",
+      "output": {
+        "status": "unchanged",
+        "clearer_information": [],
+        "capability_evidence": {
+          "assessment": "unchanged",
+          "explanation": "第一答只说了负责和研发协调知识库接入，追问想了解你亲自解决过什么接入问题；第二答仍是“协调研发、积极推动接入”的职责性表述，没有给出一个具体接入问题、你的处理动作或结果，原缺口未解决。",
+          "first_quote": "我负责和研发协调知识库接入。",
+          "second_quote": "我主要就是协调研发，积极推动知识库接入。"
+        },
+        "remaining_improvement": "仍缺少一个你亲自处理过的具体接入问题及其处理结果，目前只有职责性描述。"
+      }
+    }
+  ],
+  "review": {
+    "reviewer": "Codex",
+    "diagnosis_expected_status_matches": 5,
+    "comparison_expected_outcomes": 2,
+    "limitations": "小样本、单轮结果、自审；未做目标用户价值验证。"
+  }
+}

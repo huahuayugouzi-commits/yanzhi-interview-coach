@@ -5,6 +5,9 @@
   "required": [
     "status",
     "heard",
+    "capability_focus",
+    "evidence_assessment",
+    "issue_impact",
     "main_issue",
     "evidence_quote",
     "guiding_question",
@@ -23,6 +26,48 @@
       "minLength": 1,
       "maxLength": 1000,
       "pattern": "\\S"
+    },
+    "capability_focus": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "\\S"
+    },
+    "evidence_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "reason"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "sufficient",
+            "partial",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "issue_impact": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "main_issue": {
       "anyOf": [
@@ -86,6 +131,16 @@
       },
       "then": {
         "properties": {
+          "evidence_assessment": {
+            "properties": {
+              "level": {
+                "const": "sufficient"
+              }
+            }
+          },
+          "issue_impact": {
+            "type": "null"
+          },
           "main_issue": {
             "type": "null"
           },

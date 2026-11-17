@@ -4,7 +4,7 @@ import {createApp} from '../server/app.mjs';
 import {model} from '../server/coach.mjs';
 import {validateOutput} from '../server/contracts.mjs';
 const input={job_title:'',job_description:'岗位描述',resume:'',question:'介绍项目',answer:'我整理了需求。'};
-const valid={status:'needs_retry',heard:'你整理了需求。',main_issue:'尚未说明效果。',evidence_quote:'整理了需求',guiding_question:'整理需求后有什么变化？',retry_hints:['实际变化']};
+const valid={status:'needs_retry',heard:'你整理了需求。',capability_focus:'效果验证',evidence_assessment:{level:'partial',reason:'行动清楚但效果未展开。'},issue_impact:'需要效果证据判断行动价值。',main_issue:'尚未说明效果。',evidence_quote:'整理了需求',guiding_question:'整理需求后有什么变化？',retry_hints:['实际变化']};
 async function start(t,opts){const s=createApp(opts).listen(0,'127.0.0.1');await new Promise(r=>s.once('listening',r));t.after(()=>new Promise(r=>{s.close(r);s.closeAllConnections();}));return 'http://127.0.0.1:'+s.address().port;}
 const post=(base,route='diagnose',code='')=>fetch(base+'/api/'+route,{method:'POST',headers:{'Content-Type':'application/json','X-Access-Code':code},body:JSON.stringify(input)});
 test('model and ASR APIs require trial code, health never leaks it',async t=>{let calls=0;const base=await start(t,{accessCode:'private-test-code',config:{},runModel:async()=>{calls++;return valid;}});assert.equal((await post(base)).status,401);assert.equal((await post(base,'transcribe')).status,401);assert.equal((await post(base,'access','wrong')).status,401);assert.equal((await post(base,'access','private-test-code')).status,200);assert.equal((await post(base,'diagnose','private-test-code')).status,200);assert.equal(calls,1);const text=await(await fetch(base+'/api/health')).text();assert(!text.includes('private-test-code'));assert.equal(JSON.parse(text).access_required,true);});
