@@ -1,0 +1,34 @@
+✔ health exposes readiness only, never secrets (67.049ms)
+✔ missing, whitespace, extra and oversized input are rejected before model (42.9983ms)
+✔ diagnosis API passes exact input to server model (8.6881ms)
+✔ unconfigured real model returns honest actionable 503 (5.7718ms)
+✔ strict schema rejects invalid status, extra fields, hint overflow, clear correction (1.1193ms)
+✔ fabricated or resume-only evidence rejected; null allowed (0.9077ms)
+✔ multiple explicit follow-up questions rejected (0.197ms)
+✔ independent comparison schema and respective quote attribution (0.8489ms)
+✔ comparison API includes original question, follow-up and both answers (5.6589ms)
+✔ model transport uses server authorization and JSON format; user data isolated (1.0437ms)
+✔ upstream malformed JSON, invalid schema, HTTP and network failures handled (2.0096ms)
+✔ ASR missing credential and malformed result do not pretend success (1.9112ms)
+✔ ASR upload contract, valid text and API rejection paths (16.579ms)
+✔ cross-site request and invalid JSON rejected without leaking input (6.6597ms)
+✔ blank second answer rejected and original follow-up can be null (5.4612ms)
+✔ combined maximum-length Chinese fields fit the API byte limit (6.3553ms)
+✔ oversized audio upload rejected before ASR (65.9473ms)
+✔ golden and natural fixtures contain all requested cases (not a model evaluation) (11.868ms)
+✔ model and ASR APIs require trial code, health never leaks it (10.2387ms)
+✔ wrong access attempts are rate limited (10.1213ms)
+✔ per-IP hourly limit prevents extra model calls (4.8961ms)
+✔ per-instance daily limit prevents extra model calls (5.1253ms)
+✔ compound question with one question mark is rejected (0.1796ms)
+✔ compound main issue rejected instead of showing two gaps (0.1272ms)
+✔ invalid first model response repaired once using same original answer (0.6521ms)
+✔ persistent invalid model output stops after two calls (0.7632ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2075.4292

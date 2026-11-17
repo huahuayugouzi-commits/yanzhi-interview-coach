@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "clearer_information",
+    "capability_evidence",
+    "remaining_improvement"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "improved",
+        "unchanged",
+        "insufficient"
+      ]
+    },
+    "clearer_information": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500,
+        "pattern": "\\S"
+      }
+    },
+    "capability_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessment",
+        "explanation",
+        "first_quote",
+        "second_quote"
+      ],
+      "properties": {
+        "assessment": {
+          "enum": [
+            "more_complete",
+            "partial",
+            "unchanged",
+            "insufficient"
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800,
+          "pattern": "\\S"
+        },
+        "first_quote": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "second_quote": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "remaining_improvement": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

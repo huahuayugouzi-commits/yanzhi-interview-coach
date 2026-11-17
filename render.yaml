@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: yanzhi-interview-coach
+    runtime: node
+    plan: free
+    buildCommand: npx --yes pnpm@11.25.0 install --frozen-lockfile && npx --yes pnpm@11.25.0 run build
+    startCommand: node server/index.mjs
+    healthCheckPath: /api/health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://api.deepseek.com
+      - key: LLM_MODEL
+        value: deepseek-chat
+      - key: ACCESS_CODE
+        generateValue: true
+      - key: DAILY_LIMIT
+        value: 100
+      - key: HOURLY_LIMIT
+        value: 20

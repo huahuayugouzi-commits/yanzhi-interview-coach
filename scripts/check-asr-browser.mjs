@@ -1,0 +1,40 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+const report={at:new Date().toISOString(),source:'Synthetic Chinese speech fed into Chromium fake microphone; real browser recorder and real ASR API',reference:'我负责梳理需求，协调研发修复问题，并在上线前完成测试。'};
+let browser;
+try{
+ const wav=path.resolve('work/asr-check.wav');
+ browser=await chromium.launch({channel:'msedge',headless:true,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream','--use-file-for-fake-audio-capture='+wav]});
+ const context=await browser.newContext({viewport:{width:393,height:852},permissions:['microphone']});
+ const page=await context.newPage();
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:3001');
+ if(process.env.ACCESS_CODE){await page.getByLabel('试用口令').fill(process.env.ACCESS_CODE);await page.getByRole('button',{name:'进入训练'}).click();}
+ await page.getByLabel('岗位描述 JD').fill('AI 产品经理，负责需求分析、跨团队协作及效果验证。');
+ await page.getByRole('button',{name:'开始训练'}).click();
+ await page.getByRole('button',{name:'开始录音'}).click();
+ await page.getByRole('button',{name:'停止录音'}).waitFor();
+ await page.waitForTimeout(11000);
+ await page.getByRole('button',{name:'停止录音'}).click();
+ await page.locator('audio').waitFor();
+ const response=page.waitForResponse(r=>r.url().endsWith('/api/transcribe'),{timeout:70000});
+ await page.getByRole('button',{name:'转为文字'}).click();
+ const r=await response;report.http=r.status();
+ const data=await r.json();
+ if(!r.ok())throw Error(data.error?.message||'ASR request failed');
+ report.text=data.text;
+ const input=page.getByLabel('回答内容');
+ await page.waitForFunction(()=>document.querySelector('#first-answer')?.value?.includes('需求'));
+ report.editable=await input.isEditable();
+ await input.fill(data.text+' 我修改了转录。');
+ report.edit_preserved=(await input.inputValue()).endsWith('我修改了转录。');
+ report.no_horizontal_overflow=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth);
+ report.page_errors=errors;
+ report.passed=['需求','研发','测试'].every(x=>data.text.includes(x))&&report.editable&&report.edit_preserved&&!errors.length;
+ report.status=report.passed?'PASSED_BROWSER_REAL_ASR':'REVIEW_REQUIRED';
+ await page.screenshot({path:'docs/evaluation/asr-browser.png',fullPage:true});
+}catch(e){report.status='FAILED';report.error=e.message;}finally{await browser?.close();}
+await fs.writeFile('docs/evaluation/asr-browser.json',JSON.stringify(report,null,2));
+console.log(JSON.stringify(report,null,2));
+if(!report.passed)process.exitCode=1;

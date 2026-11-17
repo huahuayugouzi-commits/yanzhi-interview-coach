@@ -1,0 +1,12 @@
+[
+ {"id":"TC01","question":"介绍一个你负责的项目。","answer":"我们团队做了一个智能助手，大家一起讨论需求，最后成功上线。","expected_class":"missing_contribution","expected_status":"needs_retry"},
+ {"id":"TC02","question":"你如何解决项目中的困难？","answer":"我组织会议、整理问题清单，还协调了研发和设计团队。","expected_class":"missing_result","expected_status":"needs_retry"},
+ {"id":"TC03","question":"为什么你适合这个岗位？","answer":"我觉得贵公司发展很好，办公环境也不错，我很期待加入。","expected_class":"off_topic","expected_status":"needs_retry"},
+ {"id":"TC04","question":"介绍你的项目经历。","answer":"后来我们上线了，之前我做过调研，最开始项目没有方向，中间还调整过方案。","expected_class":"disorganized","expected_status":"needs_retry"},
+ {"id":"TC05","question":"你在项目中负责什么？","answer":"我主要负责需求分析，就是分析需求。需求分析很重要，所以我主要做需求方面的工作。","expected_class":"repetitive","expected_status":"needs_retry"},
+ {"id":"TC06","question":"你如何解决项目中的困难？","answer":"项目上线前发现用户无法保存草稿。我负责梳理复现步骤，与研发确认接口问题，推动修复并完成回归测试，最终在上线前解决了该故障。","expected_class":"no_issue","expected_status":"clear"},
+ {"id":"TC07","question":"你做过什么产品验证？","answer":"我参与过产品测试。","expected_class":"missing_evidence","expected_status":"needs_retry"},
+ {"id":"TC08","question":"介绍一个项目。","answer":"嗯……那个……然后……就是……","expected_class":"insufficient_information","expected_status":"insufficient"},
+ {"id":"TC09","question":"你如何衡量项目效果？","answer":"我们上线以后效果很好，用户反馈也不错。","expected_class":"vague_result","expected_status":"needs_retry"},
+ {"id":"TC10","question":"你在项目中负责什么？","answer":"整个项目都是我独立完成的，包括设计和开发。不过开发部分其实是研发团队完成的。","expected_class":"contradictory_contribution","expected_status":"needs_retry"}
+]

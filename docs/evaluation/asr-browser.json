@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-17T05:24:49.144Z",
+  "source": "Synthetic Chinese speech fed into Chromium fake microphone; real browser recorder and real ASR API",
+  "reference": "我负责梳理需求，协调研发修复问题，并在上线前完成测试。",
+  "http": 200,
+  "text": "我负责梳理需求，协调研发修复问题，并在上线前完成测试。我负责梳理需求，协调研发修复。",
+  "editable": true,
+  "edit_preserved": true,
+  "no_horizontal_overflow": true,
+  "page_errors": [],
+  "passed": true,
+  "status": "PASSED_BROWSER_REAL_ASR"
+}

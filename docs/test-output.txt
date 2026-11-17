@@ -1,0 +1,25 @@
+✔ health exposes readiness only, never secrets (65.0241ms)
+✔ missing, whitespace, extra and oversized input are rejected before model (39.9097ms)
+✔ diagnosis API passes exact input to server model (7.0168ms)
+✔ unconfigured real model returns honest actionable 503 (5.7228ms)
+✔ strict schema rejects invalid status, extra fields, hint overflow, clear correction (1.1916ms)
+✔ fabricated or resume-only evidence rejected; null allowed (1.007ms)
+✔ multiple explicit follow-up questions rejected (0.1763ms)
+✔ independent comparison schema and respective quote attribution (1.0145ms)
+✔ comparison API includes original question, follow-up and both answers (6.4339ms)
+✔ model transport uses server authorization and JSON format; user data isolated (1.1387ms)
+✔ upstream malformed JSON, invalid schema, HTTP and network failures handled (1.4591ms)
+✔ ASR missing credential and malformed result do not pretend success (1.0847ms)
+✔ ASR upload contract, valid text and API rejection paths (15.0838ms)
+✔ cross-site request and invalid JSON rejected without leaking input (7.0545ms)
+✔ blank second answer rejected and original follow-up can be null (6.1718ms)
+✔ oversized audio upload rejected before ASR (74.1435ms)
+✔ golden and natural fixtures contain all requested cases (not a model evaluation) (3.7599ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 512.8402

@@ -1,0 +1,577 @@
+{
+  "run_at": "2026-11-13T06:59:27.414Z",
+  "model": "deepseek-chat",
+  "status": "PASSED_TEXT_MVP_REVIEW",
+  "note": "真实模型调用；引文和 Schema 自动校验。分类、事实忠实度、单一缺口和自然感必须人工审核，禁止把状态符合当作分类准确。",
+  "cases": [
+    {
+      "id": "TC01",
+      "question": "介绍一个你负责的项目。",
+      "answer": "我们团队做了一个智能助手，大家一起讨论需求，最后成功上线。",
+      "expected_class": "missing_contribution",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "介绍一个你负责的项目。",
+        "answer": "我们团队做了一个智能助手，大家一起讨论需求，最后成功上线。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "missing_contribution",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "个人贡献缺失；引文连续。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到团队做了一个智能助手，大家一起讨论需求，最后成功上线。",
+        "main_issue": "只说了团队整体做了什么，没有听到你个人在项目中具体承担的部分。",
+        "evidence_quote": "我们团队做了一个智能助手，大家一起讨论需求，最后成功上线。",
+        "guiding_question": "这个项目里哪一部分是你亲手负责的？",
+        "retry_hints": [
+          "讲你个人负责的部分",
+          "说一件你亲手做的事",
+          "避免只说团队"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC02",
+      "question": "你如何解决项目中的困难？",
+      "answer": "我组织会议、整理问题清单，还协调了研发和设计团队。",
+      "expected_class": "missing_result",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你如何解决项目中的困难？",
+        "answer": "我组织会议、整理问题清单，还协调了研发和设计团队。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "missing_result",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "个人动作已明确，主要缺口为动作带来的结果。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到在项目中组织会议、整理问题清单，并协调研发和设计团队。",
+        "main_issue": "你说了自己做了哪些协调动作，但还没说明这些动作带来了什么实际变化。",
+        "evidence_quote": "我组织会议、整理问题清单，还协调了研发和设计团队。",
+        "guiding_question": "这些协调动作之后，原来的困难出现了什么变化？",
+        "retry_hints": [
+          "说清困难是什么",
+          "讲一件具体的事",
+          "补充协调后的变化"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC03",
+      "question": "为什么你适合这个岗位？",
+      "answer": "我觉得贵公司发展很好，办公环境也不错，我很期待加入。",
+      "expected_class": "off_topic",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "为什么你适合这个岗位？",
+        "answer": "我觉得贵公司发展很好，办公环境也不错，我很期待加入。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "off_topic",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "未回答适岗问题；聚焦相关经历。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你表达了对公司发展和办公环境的认可，以及希望加入的意愿。",
+        "main_issue": "没有回答“为什么适合”，缺少与 AI 产品经理岗位相关的个人经历或能力证据。",
+        "evidence_quote": "我觉得贵公司发展很好，办公环境也不错，我很期待加入。",
+        "guiding_question": "你过去哪一段经历能说明你具备做 AI 产品经理的能力？",
+        "retry_hints": [
+          "讲一段真实经历",
+          "说清你做了什么",
+          "对应岗位能力"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC04",
+      "question": "介绍你的项目经历。",
+      "answer": "后来我们上线了，之前我做过调研，最开始项目没有方向，中间还调整过方案。",
+      "expected_class": "disorganized",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "介绍你的项目经历。",
+        "answer": "后来我们上线了，之前我做过调研，最开始项目没有方向，中间还调整过方案。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "disorganized",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "顺序混乱；仅要求按发生顺序重讲。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到项目最开始没有方向，之前做过调研，中间调整过方案，后来上线了。",
+        "main_issue": "事件顺序前后跳跃，无法串起项目从开始到上线的过程。",
+        "evidence_quote": "后来我们上线了，之前我做过调研，最开始项目没有方向，中间还调整过方案。",
+        "guiding_question": "能从项目起点开始，按发生顺序重讲这段经历吗？",
+        "retry_hints": [
+          "从最开始讲起",
+          "按时间顺序说",
+          "讲清前后变化"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC05",
+      "question": "你在项目中负责什么？",
+      "answer": "我主要负责需求分析，就是分析需求。需求分析很重要，所以我主要做需求方面的工作。",
+      "expected_class": "repetitive",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你在项目中负责什么？",
+        "answer": "我主要负责需求分析，就是分析需求。需求分析很重要，所以我主要做需求方面的工作。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "repetitive",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "重复职责名称；用具体行动替代重复。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你反复说明自己主要负责需求分析，但没有讲出任何一次具体做过的事。",
+        "main_issue": "回答停留在重复“需求分析”这个职责名称，没有展开任何具体工作内容。",
+        "evidence_quote": "我主要负责需求分析，就是分析需求。",
+        "guiding_question": "能讲一件你亲手做过的需求分析吗？",
+        "retry_hints": [
+          "选一件具体需求",
+          "说清你做了什么",
+          "按事情顺序讲"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC06",
+      "question": "你如何解决项目中的困难？",
+      "answer": "项目上线前发现用户无法保存草稿。我负责梳理复现步骤，与研发确认接口问题，推动修复并完成回归测试，最终在上线前解决了该故障。",
+      "expected_class": "no_issue",
+      "expected_status": "clear",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你如何解决项目中的困难？",
+        "answer": "项目上线前发现用户无法保存草稿。我负责梳理复现步骤，与研发确认接口问题，推动修复并完成回归测试，最终在上线前解决了该故障。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "no_issue",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "具体问题、行动和闭环齐全，不强行纠偏。"
+      },
+      "output": {
+        "status": "clear",
+        "heard": "你讲到上线前发现用户无法保存草稿，你梳理复现步骤、与研发确认接口问题、推动修复并完成回归测试，最终在上线前解决了故障。",
+        "main_issue": null,
+        "evidence_quote": "项目上线前发现用户无法保存草稿。我负责梳理复现步骤，与研发确认接口问题，推动修复并完成回归测试，最终在上线前解决了该故障。",
+        "guiding_question": null,
+        "retry_hints": []
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC07",
+      "question": "你做过什么产品验证？",
+      "answer": "我参与过产品测试。",
+      "expected_class": "missing_evidence",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你做过什么产品验证？",
+        "answer": "我参与过产品测试。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "missing_evidence",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "主要缺口为缺少具体验证证据；heard 略长，可继续优化文风。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你只说了参与过产品测试，没有说明具体是哪款产品、你负责哪部分测试，以及测试后得到什么结论。",
+        "main_issue": "回答没有展开任何一次具体的产品验证经历，无法判断你的实际参与和验证结果。",
+        "evidence_quote": "我参与过产品测试。",
+        "guiding_question": "能讲一次你具体做过的产品测试吗？",
+        "retry_hints": [
+          "选一次具体测试",
+          "说明你负责的部分",
+          "说测试后的结论"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC08",
+      "question": "介绍一个项目。",
+      "answer": "嗯……那个……然后……就是……",
+      "expected_class": "insufficient_information",
+      "expected_status": "insufficient",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "介绍一个项目。",
+        "answer": "嗯……那个……然后……就是……"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "insufficient_information",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "正确识别没有有效内容，要求补充。"
+      },
+      "output": {
+        "status": "insufficient",
+        "heard": "这段回答里只有语气词和停顿，没有听到任何项目信息。",
+        "main_issue": "没有可分析的项目内容，无法判断经历表达。",
+        "evidence_quote": null,
+        "guiding_question": "能选一个你参与过的项目，说说它要解决什么问题吗？",
+        "retry_hints": [
+          "选一个具体项目",
+          "先说项目目标",
+          "再讲你做了什么"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC09",
+      "question": "你如何衡量项目效果？",
+      "answer": "我们上线以后效果很好，用户反馈也不错。",
+      "expected_class": "vague_result",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你如何衡量项目效果？",
+        "answer": "我们上线以后效果很好，用户反馈也不错。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "vague_result",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "结果笼统；仅询问衡量依据。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到项目上线后效果很好、用户反馈也不错，但没有说明具体用什么指标或方式衡量。",
+        "main_issue": "回答没有给出任何可验证的衡量依据，只有笼统的正面结论。",
+        "evidence_quote": "我们上线以后效果很好，用户反馈也不错。",
+        "guiding_question": "你当时具体看哪些指标或反馈来判断效果好不好？",
+        "retry_hints": [
+          "说一个具体指标",
+          "说明数据来源",
+          "讲清判断标准"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "TC10",
+      "question": "你在项目中负责什么？",
+      "answer": "整个项目都是我独立完成的，包括设计和开发。不过开发部分其实是研发团队完成的。",
+      "expected_class": "contradictory_contribution",
+      "expected_status": "needs_retry",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你在项目中负责什么？",
+        "answer": "整个项目都是我独立完成的，包括设计和开发。不过开发部分其实是研发团队完成的。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": "contradictory_contribution",
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "前后矛盾；聚焦本人负责部分。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你说整个项目由你独立完成，包括设计和开发；随后又补充开发部分实际由研发团队完成。",
+        "main_issue": "前后说法矛盾：先说独立完成设计和开发，又说开发是研发团队做的，听不出你本人具体负责哪部分。",
+        "evidence_quote": "整个项目都是我独立完成的，包括设计和开发。不过开发部分其实是研发团队完成的。",
+        "guiding_question": "这个项目里你本人亲手完成的是哪一部分？",
+        "retry_hints": [
+          "只说你亲自做的部分",
+          "开发由谁做说清楚",
+          "避免独立完成和团队完成并列"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "NC01",
+      "question": "介绍一个你负责的项目。",
+      "answer": "我们做了客服助手，我主要协调知识库接入。",
+      "review_focus": "真实提及知识库接入，追问一次具体协调，不编造效率提升。",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "介绍一个你负责的项目。",
+        "answer": "我们做了客服助手，我主要协调知识库接入。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": null,
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "引用知识库接入，追问针对个人行动。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到做过一个客服助手项目，你主要协调知识库接入。",
+        "main_issue": "目前只说了协调知识库接入这一职责，还没有说明你具体做了什么。",
+        "evidence_quote": "我主要协调知识库接入",
+        "guiding_question": "围绕知识库接入，你亲手做过哪一件具体的事？",
+        "retry_hints": [
+          "讲一件具体做过的事",
+          "说清你的动作",
+          "别只讲职责名称"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": null
+    },
+    {
+      "id": "NC02",
+      "question": "你如何解决项目中的困难？",
+      "answer": "法务担心用户隐私，我把字段逐项分级，和研发调整脱敏策略，最终通过内部审核。",
+      "expected_status": "clear",
+      "review_focus": "非量化结果也可 clear；不强求虚构数字，不空泛夸奖。",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你如何解决项目中的困难？",
+        "answer": "法务担心用户隐私，我把字段逐项分级，和研发调整脱敏策略，最终通过内部审核。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": null,
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "认可通过内部审核的非数字闭环。"
+      },
+      "output": {
+        "status": "clear",
+        "heard": "你说法务担心用户隐私时，你把字段逐项分级，和研发调整了脱敏策略，最终通过内部审核。",
+        "main_issue": null,
+        "evidence_quote": "法务担心用户隐私，我把字段逐项分级，和研发调整脱敏策略，最终通过内部审核。",
+        "guiding_question": null,
+        "retry_hints": []
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": true
+    },
+    {
+      "id": "NC03",
+      "question": "请做一个自我介绍。",
+      "answer": "我做过三年客服产品，转岗后在做 AI 知识库，目前希望继续负责客服场景的需求分析。",
+      "review_focus": "回应客服与转岗背景；针对岗位证据提一个自然问题。",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "请做一个自我介绍。",
+        "answer": "我做过三年客服产品，转岗后在做 AI 知识库，目前希望继续负责客服场景的需求分析。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": null,
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "围绕客服和 AI 知识库经历追问，无编造成果。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到自己做过三年客服产品，转岗后在做 AI 知识库，现在希望继续负责客服场景的需求分析。",
+        "main_issue": "这段自我介绍只说了岗位经历和求职意向，还没有听到任何一段具体经历能证明你具备 AI 产品经理所需的需求分析或产品落地能力。",
+        "evidence_quote": "我做过三年客服产品，转岗后在做 AI 知识库",
+        "guiding_question": "能讲一段你在 AI 知识库中亲手做需求分析的经历吗？",
+        "retry_hints": [
+          "选一段具体经历",
+          "说清你做了什么",
+          "讲出实际变化"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": null
+    },
+    {
+      "id": "NC04",
+      "question": "你如何衡量项目效果？",
+      "answer": "没有拿到完整的线上数据，但我看过两次用户访谈记录。",
+      "review_focus": "承认数据边界，追问访谈中的实际证据，不编造指标。",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你如何衡量项目效果？",
+        "answer": "没有拿到完整的线上数据，但我看过两次用户访谈记录。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": null,
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "接受缺少线上数据的边界，询问访谈事实。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到没有拿到完整的线上数据，但看过两次用户访谈记录。",
+        "main_issue": "还没有说明你如何用这两次访谈记录衡量项目效果。",
+        "evidence_quote": "没有拿到完整的线上数据，但我看过两次用户访谈记录。",
+        "guiding_question": "你从这两次访谈记录里看到了什么变化？",
+        "retry_hints": [
+          "说访谈里的具体发现",
+          "说这些发现说明了什么"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": null
+    },
+    {
+      "id": "NC05",
+      "question": "你在项目中负责什么？",
+      "answer": "我只参与了交互评审，方案和上线是同事负责的。",
+      "review_focus": "不扩大个人贡献，追问评审中的具体发现，不给标准答案。",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "AI 产品经理，负责需求分析、产品设计、跨团队协作、产品上线及效果验证。",
+        "resume": "",
+        "question": "你在项目中负责什么？",
+        "answer": "我只参与了交互评审，方案和上线是同事负责的。"
+      },
+      "manual_review": {
+        "reviewer": "Codex agent review, not independent human certification",
+        "actual_class": null,
+        "no_fabrication": true,
+        "one_main_issue": true,
+        "one_natural_question": true,
+        "specific_and_non_template": true,
+        "notes": "不扩大贡献，追问评审中实际行为。"
+      },
+      "output": {
+        "status": "needs_retry",
+        "heard": "你说明自己只参与了交互评审，方案和上线由同事负责。",
+        "main_issue": "目前只听到参与环节，还没有听到你在交互评审中具体做了什么。",
+        "evidence_quote": "我只参与了交互评审，方案和上线是同事负责的。",
+        "guiding_question": "你在交互评审中具体提出了哪些意见或改动？",
+        "retry_hints": [
+          "讲一次具体评审",
+          "你提出的具体意见",
+          "评审中的实际动作"
+        ]
+      },
+      "schema_and_quotes_valid": true,
+      "status_matches": null
+    }
+  ],
+  "comparison": {
+    "status": "improved",
+    "clearer_information": [
+      "第二答补充了具体接入问题：权限字段遗漏",
+      "说明了个人行动：逐项整理业务字段、与研发确认后补齐",
+      "给出了闭环结果：用测试账号验证通过"
+    ],
+    "capability_evidence": {
+      "assessment": "more_complete",
+      "explanation": "第一答只笼统说负责与研发协调，第二答落到一个具体接入问题，并说清个人行动和验证通过的结果，已形成问题—行动—结果的闭环，证据比第一答完整。",
+      "first_quote": "我们做了知识库接入，我负责和研发协调。",
+      "second_quote": "我逐项整理了业务字段，发现权限字段遗漏，和研发确认后补齐，并用测试账号验证通过。"
+    },
+    "remaining_improvement": null
+  },
+  "schema_valid_count": 15,
+  "expected_status_match_count": 11,
+  "classification_match_count": 10,
+  "comparison_review": {
+    "passed": true,
+    "notes": "二答仅补充追问，正确认可闭环，没有要求重复第一答或继续强求业务收益。"
+  },
+  "limitations": [
+    "One fixed fixture run; not a guarantee on unseen input.",
+    "Manual semantic review performed by Codex, not an independent human reviewer.",
+    "Real ASR not configured; text-first trial only."
+  ]
+}

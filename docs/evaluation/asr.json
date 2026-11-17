@@ -1,0 +1,8 @@
+{
+  "at": "2026-11-17T05:21:38.724Z",
+  "source": "Windows synthesized Chinese speech, no user voice",
+  "reference": "我负责梳理需求，协调研发修复问题，并在上线前完成测试。",
+  "text": "我负责梳理需求，协调研发修复问题，并在上线前完成测试。",
+  "passed": true,
+  "status": "PASSED_SYNTHETIC_AUDIO"
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "job_title",
+    "job_description",
+    "resume",
+    "question",
+    "answer"
+  ],
+  "properties": {
+    "job_title": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "job_description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000,
+      "pattern": "\\S"
+    },
+    "resume": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "\\S"
+    },
+    "answer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000,
+      "pattern": "\\S"
+    }
+  }
+}
