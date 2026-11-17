@@ -1,0 +1,221 @@
+{
+  "run_at": "2026-11-17T08:42:12.001Z",
+  "note": "真实模型跨题型小样本；状态匹配不是语义准确率，须另行自审。",
+  "cases": [
+    {
+      "id": "decision-missing",
+      "question": "请讲一次你在项目中做方案取舍的经历。",
+      "answer": "我做知识库问答，选了检索方案，协调研发完成接入，用测试账号验证通过。",
+      "expected": "needs_retry",
+      "review": "追问选择依据，而非重复要求结果",
+      "output": {
+        "status": "needs_retry",
+        "heard": "你做过知识库问答项目，选择了检索方案，协调研发完成接入，并用测试账号验证通过。",
+        "capability_focus": "方案取舍的决策依据",
+        "evidence_assessment": {
+          "level": "partial",
+          "reason": "已说明选择的是检索方案，也有接入和验证动作，但没有说明当时有哪些备选方向、受什么条件约束，因此无法判断取舍依据。"
+        },
+        "issue_impact": "本题问的是方案取舍，缺少备选方向和选择理由，就无法判断你当时如何做决策。",
+        "main_issue": "没有说明选择检索方案时的主要判断依据",
+        "evidence_quote": "我做知识库问答，选了检索方案，协调研发完成接入，用测试账号验证通过。",
+        "guiding_question": "当时你选择检索方案的主要依据是什么？",
+        "retry_hints": [
+          "选择检索方案的理由"
+        ]
+      }
+    },
+    {
+      "id": "decision-sufficient",
+      "question": "请讲一次你在项目中做方案取舍的经历。",
+      "answer": "我负责知识库问答的方案选择。当时文档每周更新，团队只有两周开发时间。我比较了微调和检索增强，微调需要持续更新训练数据，检索可以直接更新文档。因此我选择先做检索，接受检索质量需要单独评估的代价。",
+      "expected": "clear",
+      "review": "有约束、备选与取舍依据，无须强加数字",
+      "output": {
+        "status": "clear",
+        "heard": "你负责知识库问答的方案选择，在文档每周更新、团队只有两周开发时间的约束下，比较了微调和检索增强，最终选择先做检索，并接受检索质量需要单独评估的代价。",
+        "capability_focus": "方案取舍：约束条件、备选方向与选择依据",
+        "evidence_assessment": {
+          "level": "sufficient",
+          "reason": "已说明时间与文档更新频率的约束，给出微调和检索增强两个备选方向，并说明选择检索的依据是可直接更新文档、微调需持续更新训练数据，同时点明接受的质量评估代价，取舍逻辑完整。"
+        },
+        "issue_impact": null,
+        "main_issue": null,
+        "evidence_quote": null,
+        "guiding_question": null,
+        "retry_hints": []
+      }
+    },
+    {
+      "id": "failure-no-learning",
+      "question": "请讲一次失败的经历，以及你从中学到了什么。",
+      "answer": "我负责发布前验收，漏测了无权限账号，导致内部试用时越权读取。我当天补上权限拦截并复测通过。",
+      "expected": "needs_retry",
+      "review": "聚焦认识或后续改变，不重问已提供的修复结果",
+      "output": {
+        "status": "needs_retry",
+        "heard": "你负责发布前验收时漏测了无权限账号，导致内部试用出现越权读取；当天补上权限拦截并复测通过。",
+        "capability_focus": "失败复盘与后续改进意识",
+        "evidence_assessment": {
+          "level": "partial",
+          "reason": "已说明自己的失误、补救动作和复测结果，但未回应题目中“学到了什么”，无法判断这次失败是否带来认识或后续做法上的改变。"
+        },
+        "issue_impact": "缺少从这次漏测中获得的反思或后续调整，本题的核心考察点无法判断。",
+        "main_issue": "只讲了补救和复测通过，没有说明这次失败让你在认识或后续做法上有什么改变。",
+        "evidence_quote": "我当天补上权限拦截并复测通过。",
+        "guiding_question": "这次漏测之后，你在验收做法上有什么具体的改变？",
+        "retry_hints": [
+          "补充后续验收做法的改变"
+        ]
+      }
+    },
+    {
+      "id": "failure-mechanism",
+      "question": "请讲一次失败的经历，以及你从中学到了什么。",
+      "answer": "我漏测无权限账号，导致内部试用越权读取。我承认是自己的验收遗漏，先关闭入口，与研发补上权限校验。此后我把有权限和无权限用例都加入发布清单，每次发布由另一人交叉复核。这让我不再只验证正常路径。",
+      "expected": "clear",
+      "review": "承认责任且有后续机制，不能继续要求感想",
+      "output": {
+        "status": "clear",
+        "heard": "用户讲了一次漏测无权限账号导致内部试用越权读取的失败，承认是自己的验收遗漏，先关闭入口并与研发补上权限校验，之后把有权限和无权限用例加入发布清单并由另一人交叉复核。",
+        "capability_focus": "失败中的责任承担、修复与后续改进",
+        "evidence_assessment": {
+          "level": "sufficient",
+          "reason": "已说明自身失误、补救动作和后续机制调整，并点出认识变化，回应了失败与学习这一题。"
+        },
+        "issue_impact": null,
+        "main_issue": null,
+        "evidence_quote": null,
+        "guiding_question": null,
+        "retry_hints": []
+      }
+    },
+    {
+      "id": "we-with-contribution",
+      "question": "请讲一次你与他人意见不一致时推动协作的经历。",
+      "answer": "我们做客服知识库，业务希望先覆盖所有品类，研发担心时间不够。我分别确认业务最急的是退换货、研发受限于历史文档清洗，于是我列出先覆盖退换货再扩品类的方案，双方评审后同意分批交付，首批内部验收通过。",
+      "expected": "clear",
+      "review": "有我们但个人行动清楚，不要求赢过对方",
+      "output": {
+        "status": "clear",
+        "heard": "客服知识库项目中，业务想先覆盖所有品类，研发担心时间不够；你分别确认了业务最急的是退换货、研发受限于历史文档清洗，提出先覆盖退换货再扩品类的分批方案，双方评审后同意，首批内部验收通过。",
+        "capability_focus": "协作中识别双方诉求并推动形成可执行方案",
+        "evidence_assessment": {
+          "level": "sufficient",
+          "reason": "已说明具体分歧（覆盖范围与时间）、你分别了解双方约束、提出分批交付方案并推动评审达成一致，结果有内部验收作为验证，个人推进动作清晰。"
+        },
+        "issue_impact": null,
+        "main_issue": null,
+        "evidence_quote": null,
+        "guiding_question": null,
+        "retry_hints": []
+      }
+    },
+    {
+      "id": "conflict-vague",
+      "question": "请讲一次你与他人意见不一致时推动协作的经历。",
+      "answer": "业务和研发意见不一样，我积极协调，最后我们顺利完成项目，大家都满意。",
+      "expected": "needs_retry",
+      "review": "定位具体分歧或推进方式，不套宏观结果",
+      "output": {
+        "status": "needs_retry",
+        "heard": "你提到业务和研发意见不一致，你积极协调后项目顺利完成，双方都满意。",
+        "capability_focus": "协作中识别分歧并推动解决的具体行动",
+        "evidence_assessment": {
+          "level": "insufficient",
+          "reason": "只说了意见不一致和协调成功，没有说明分歧具体是什么、你做了什么推进动作，无法判断协作能力。"
+        },
+        "issue_impact": "缺少具体分歧内容和个人推进方式，无法评估你在协作中的实际作用。",
+        "main_issue": "没有说明业务和研发具体在什么事情上意见不一致",
+        "evidence_quote": "业务和研发意见不一样，我积极协调，最后我们顺利完成项目，大家都满意。",
+        "guiding_question": "当时业务和研发具体在哪个问题上意见不一致？",
+        "retry_hints": [
+          "双方分歧的具体内容"
+        ]
+      }
+    },
+    {
+      "id": "execution-valid",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "我在知识库接入项目里负责验收执行。按既定清单用测试账号检查文档读取时，我发现权限字段漏传，记录复现步骤交给研发。修复后我用有权限与无权限两类账号复测，结果均符合清单，提交了验收记录。架构方案由负责人决定。",
+      "expected": "clear",
+      "review": "可靠执行是有效贡献，不要求冒认架构决策",
+      "output": {
+        "status": "clear",
+        "heard": "你在知识库接入项目中负责验收执行，按清单用测试账号检查文档读取时发现权限字段漏传，记录复现步骤交给研发；修复后用有权限和无权限两类账号复测，结果符合清单并提交验收记录。",
+        "capability_focus": "质量验证中的个人执行与问题闭环",
+        "evidence_assessment": {
+          "level": "sufficient",
+          "reason": "已说明项目目标（知识库接入验收）、个人职责（验收执行）、具体行动（按清单检查、发现权限字段漏传、记录复现步骤、交研发修复、两类账号复测）和可验证结果（复测符合清单、提交验收记录），个人贡献与闭环清晰，且明确架构方案由负责人决定，未夸大职责。"
+        },
+        "issue_impact": null,
+        "main_issue": null,
+        "evidence_quote": null,
+        "guiding_question": null,
+        "retry_hints": []
+      }
+    },
+    {
+      "id": "intro-concise",
+      "question": "请做一个自我介绍。",
+      "answer": "我做过两年客服工具产品，主要负责需求梳理和知识库改进。例如客服反馈答案找不到出处，我设计了结论下展示原文与来源链接，内部试用中客服可以直接核对。我想应聘知识库产品岗位，把这段需求分析和验证经验用于类似场景。",
+      "expected": "clear",
+      "review": "自我介绍已有匹配与实例，不要求完整战略故事",
+      "output": {
+        "status": "clear",
+        "heard": "用户做了两年客服工具产品，负责需求梳理和知识库改进；举例客服反馈答案找不到出处，自己设计了结论下展示原文与来源链接，内部试用中客服可直接核对。用户希望应聘知识库产品岗位。",
+        "capability_focus": "自我介绍中与知识库产品岗位相关的需求分析与验证经验",
+        "evidence_assessment": {
+          "level": "sufficient",
+          "reason": "自我介绍简洁说明了相关经历、一个具体个人行动（设计原文与来源链接展示）以及内部试用验证方式，并点明与目标岗位的匹配方向，符合自我介绍允许概述、不要求完整 STAR 的标准。"
+        },
+        "issue_impact": null,
+        "main_issue": null,
+        "evidence_quote": null,
+        "guiding_question": null,
+        "retry_hints": []
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "decision-unresolved",
+      "output": {
+        "status": "unchanged",
+        "clearer_information": [],
+        "capability_evidence": {
+          "assessment": "unchanged",
+          "explanation": "原追问要的是选择检索方案的依据，第二答只补充了接入后的回归测试和内部验收结果，仍没有说明当时为什么选检索、基于什么约束或对比做出判断，原缺口未解决。",
+          "first_quote": "我做知识库问答，选了检索方案，协调研发完成接入，用测试账号验证通过。",
+          "second_quote": "后来研发接入后，回归测试通过，内部验收通过。"
+        },
+        "remaining_improvement": "仍需补充选择检索方案时的判断依据，例如当时的需求约束或与其他方案的对比理由。"
+      }
+    },
+    {
+      "id": "decision-resolved",
+      "output": {
+        "status": "improved",
+        "clearer_information": [
+          "补充了备选方案：微调与检索",
+          "补充了选择依据：文档每周更新、开发周期只有两周",
+          "说明了接受的代价：检索召回需要单独评估"
+        ],
+        "capability_evidence": {
+          "assessment": "more_complete",
+          "explanation": "原追问是选择检索方案的依据。第二答补充了真实约束（文档每周更新、两周开发时间）和选择理由（检索能直接更新文档），并说明了对代价的认知，原缺口已解决。",
+          "first_quote": "我做知识库问答，选了检索方案，协调研发完成接入，用测试账号验证通过。",
+          "second_quote": "我比较微调和检索，文档每周更新，而我们只有两周开发时间，所以先选能直接更新文档的检索方案，接受检索召回需要单独评估的代价。"
+        },
+        "remaining_improvement": null
+      }
+    }
+  ],
+  "review": {
+    "reviewer": "Codex",
+    "status_matches": "8/8",
+    "comparison_outcomes": "2/2",
+    "semantic_notes": "取舍追问依据，失败追问后续调整，协作追问分歧；有个人动作的团队叙述和执行任务被认可；二答原问题未解决与已解决得到区分。单提示未附加结果任务。",
+    "limitations": "单轮小样本自审，不代表真实用户价值验证或整体准确率。"
+  }
+}

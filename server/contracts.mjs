@@ -15,7 +15,7 @@ export const validateComparisonInput=ajv.compile(comparisonInputSchema);
 export class AppError extends Error {constructor(status,code,message){super(message);this.status=status;this.code=code;}}
 export function validateOutput(kind,value,input){
  const valid=kind==='diagnose'?validateDiagnosis:validateComparison;
- if(!valid(value))throw new AppError(502,'INVALID_MODEL_OUTPUT','模型反馈格式不符合约定，请重试。');
+ if(!valid(value)){const error=new AppError(502,'INVALID_MODEL_OUTPUT','模型反馈格式不符合约定，请重试。');error.validationIssues=valid.errors?.slice(0,6).map(({instancePath,keyword,message,params})=>({instancePath,keyword,message,params}));throw error;}
  if(kind==='diagnose'&&value.status==='needs_retry'&&(!value.evidence_quote||!value.issue_impact||value.evidence_assessment.level==='sufficient'))throw new AppError(502,'INVALID_MODEL_OUTPUT','诊断缺少原文依据或缺口解释，请重试。');
  const quotes=kind==='diagnose'?[[value.evidence_quote,input.answer]]:[[value.capability_evidence.first_quote,input.answer],[value.capability_evidence.second_quote,input.second_answer]];
  if(quotes.some(([q,a])=>q!==null&&!a.includes(q)))throw new AppError(502,'INVALID_EVIDENCE','模型引用未出现在原回答中，请重试。');
