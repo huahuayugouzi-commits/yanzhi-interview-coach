@@ -54,6 +54,16 @@
     "supplement": {
       "type": "string",
       "maxLength": 16000
+    },
+    "expression_advice": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200,
+        "pattern": "\\S"
+      }
     }
   },
   "allOf": [

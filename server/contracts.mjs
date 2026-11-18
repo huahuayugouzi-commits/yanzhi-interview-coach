@@ -2,13 +2,18 @@ import Ajv from 'ajv';
 const text=(maxLength=1000)=>({type:'string',minLength:1,maxLength,pattern:'\\S'});
 const nullable=(max=1000)=>({anyOf:[text(max),{type:'null'}]});
 const object=(properties)=>({type:'object',additionalProperties:false,required:Object.keys(properties),properties});
-export const diagnosisSchema={...object({status:{enum:['needs_retry','clear','insufficient']},heard:text(),capability_focus:text(200),evidence_assessment:object({level:{enum:['sufficient','partial','insufficient']},reason:text(800)}),issue_impact:nullable(500),main_issue:nullable(),evidence_quote:nullable(2000),guiding_question:nullable(300),retry_hints:{type:'array',maxItems:3,uniqueItems:true,items:text(30)}}),allOf:[{if:{properties:{status:{const:'clear'}}},then:{properties:{evidence_assessment:{properties:{level:{const:'sufficient'}}},issue_impact:{type:'null'},main_issue:{type:'null'},guiding_question:{type:'null'},retry_hints:{maxItems:0}}}},{if:{properties:{status:{enum:['needs_retry','insufficient']}}},then:{properties:{main_issue:text(),guiding_question:text(300)}}}]};
+export const diagnosisSchema={...object({status:{enum:['needs_retry','clear','insufficient']},heard:text(),capability_focus:text(200),evidence_assessment:object({level:{enum:['sufficient','partial','insufficient']},reason:text(800)}),issue_impact:nullable(500),main_issue:nullable(),evidence_quote:nullable(2000),guiding_question:nullable(300),retry_hints:{type:'array',maxItems:3,uniqueItems:true,items:text(30)}}),allOf:[{if:{properties:{status:{const:'clear'}}},then:{properties:{evidence_assessment:{properties:{level:{const:'sufficient'}}},issue_impact:{type:'null'},main_issue:{type:'null'},guiding_question:{type:'null'},retry_hints:{maxItems:0}}}},{if:{properties:{status:{enum:['needs_retry','insufficient']}}},then:{properties:{main_issue:text()}}}]};
+// Optional additive advice: old diagnosis responses remain valid.
+diagnosisSchema.properties.expression_advice={type:'array',maxItems:3,items:text(200)};
+diagnosisSchema.allOf.push({if:{properties:{status:{const:'insufficient'}}},then:{properties:{guiding_question:text(300)}}});
+diagnosisSchema.allOf.push({if:{properties:{status:{const:'needs_retry'},guiding_question:{type:'null'}}},then:{required:['expression_advice'],properties:{expression_advice:{minItems:1},evidence_assessment:{properties:{level:{const:'sufficient'}}}}}});
 export const comparisonSchema=object({status:{enum:['improved','unchanged','insufficient']},clearer_information:{type:'array',maxItems:3,items:text(500)},capability_evidence:object({assessment:{enum:['more_complete','partial','unchanged','insufficient']},explanation:text(800),first_quote:nullable(2000),second_quote:nullable(2000)}),remaining_improvement:nullable(800)});
 export const guidanceSchema=object({framework:{type:'array',minItems:1,maxItems:4,items:text(120)},keywords:{type:'array',minItems:1,maxItems:3,uniqueItems:true,items:text(30)},reminder:text(160),supporting_quotes:{type:'array',minItems:1,maxItems:4,items:object({source:{enum:['answer','supplement']},quote:text(2000)})}});
 const fields={job_title:{type:'string',maxLength:200},job_description:text(16000),resume:{type:'string',maxLength:20000},question:text(500),answer:text(16000)};
 export const diagnosisInputSchema=object(fields);
 export const comparisonInputSchema=object({...fields,second_answer:text(16000),guiding_question:nullable(300)});
 export const guidanceInputSchema={...object({...fields,guiding_question:nullable(300),supplement:{type:'string',maxLength:16000}}),allOf:[{if:{properties:{guiding_question:{type:'string'}}},then:{properties:{supplement:text(16000)}}}]};
+guidanceInputSchema.properties.expression_advice={type:'array',maxItems:3,items:text(200)};
 const ajv=new Ajv({allErrors:true,strict:false});
 export const validateDiagnosis=ajv.compile(diagnosisSchema);
 export const validateComparison=ajv.compile(comparisonSchema);
@@ -20,7 +25,7 @@ export class AppError extends Error {constructor(status,code,message){super(mess
 export function validateOutput(kind,value,input){
  const valid=kind==='diagnose'?validateDiagnosis:kind==='guidance'?validateGuidance:validateComparison;
  if(!valid(value)){const error=new AppError(502,'INVALID_MODEL_OUTPUT','模型反馈格式不符合约定，请重试。');error.validationIssues=valid.errors?.slice(0,6).map(({instancePath,keyword,message,params})=>({instancePath,keyword,message,params}));throw error;}
- if(kind==='diagnose'&&value.status==='needs_retry'&&(!value.evidence_quote||!value.issue_impact||value.evidence_assessment.level==='sufficient'))throw new AppError(502,'INVALID_MODEL_OUTPUT','诊断缺少原文依据或缺口解释，请重试。');
+ if(kind==='diagnose'&&value.status==='needs_retry'&&(!value.evidence_quote||!value.issue_impact||value.guiding_question!==null&&value.evidence_assessment.level==='sufficient'))throw new AppError(502,'INVALID_MODEL_OUTPUT','诊断缺少原文依据或缺口解释，请重试。');
  const quotes=kind==='guidance'?value.supporting_quotes.map(({source,quote})=>[quote,input[source]]):kind==='diagnose'?[[value.evidence_quote,input.answer]]:[[value.capability_evidence.first_quote,input.answer],[value.capability_evidence.second_quote,input.second_answer]];
  if(kind==='guidance'&&input.supplement.trim()&&!value.supporting_quotes.some(q=>q.source==='supplement'))throw new AppError(502,'INVALID_EVIDENCE','引导缺少补充内容的原文依据，请重试。');
  if(quotes.some(([q,a])=>q!==null&&!a.includes(q)))throw new AppError(502,'INVALID_EVIDENCE','模型引用未出现在原回答中，请重试。');
