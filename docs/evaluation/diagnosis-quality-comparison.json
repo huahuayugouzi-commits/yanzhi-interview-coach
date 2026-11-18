@@ -1,0 +1,632 @@
+{
+  "generated_at": "2026-11-18T03:54:16.820Z",
+  "mode": "OFFLINE_ONLY",
+  "real_model_calls": 0,
+  "status": "AWAITING_MODEL_RUN_AND_HUMAN_REVIEW",
+  "note": "仅校验输入、提示词差异并准备人工复核。after_output=null 是未执行，不是通过；不计算准确率或提升。框架兼容性由手写契约样本测试，非真实生成质量。",
+  "cases": [
+    {
+      "id": "TC01",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "介绍一个你负责的项目。",
+        "answer": "我们团队做了一个智能助手，大家一起讨论需求，最后成功上线。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "missing_contribution",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC02",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你如何解决项目中的困难？",
+        "answer": "我组织会议、整理问题清单，还协调了研发和设计团队。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "missing_result",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC03",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "为什么你适合这个岗位？",
+        "answer": "我觉得贵公司发展很好，办公环境也不错，我很期待加入。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "off_topic",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC04",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "介绍你的项目经历。",
+        "answer": "后来我们上线了，之前我做过调研，最开始项目没有方向，中间还调整过方案。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "disorganized",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC05",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你在项目中负责什么？",
+        "answer": "我主要负责需求分析，就是分析需求。需求分析很重要，所以我主要做需求方面的工作。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "repetitive",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC06",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你如何解决项目中的困难？",
+        "answer": "项目上线前发现用户无法保存草稿。我负责梳理复现步骤，与研发确认接口问题，推动修复并完成回归测试，最终在上线前解决了该故障。"
+      },
+      "expected_status": "clear",
+      "review_focus": "no_issue",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC07",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你做过什么产品验证？",
+        "answer": "我参与过产品测试。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "missing_evidence",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC08",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "介绍一个项目。",
+        "answer": "嗯……那个……然后……就是……"
+      },
+      "expected_status": "insufficient",
+      "review_focus": "insufficient_information",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC09",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你如何衡量项目效果？",
+        "answer": "我们上线以后效果很好，用户反馈也不错。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "vague_result",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "TC10",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你在项目中负责什么？",
+        "answer": "整个项目都是我独立完成的，包括设计和开发。不过开发部分其实是研发团队完成的。"
+      },
+      "expected_status": "needs_retry",
+      "review_focus": "contradictory_contribution",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "NC01",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "介绍一个你负责的项目。",
+        "answer": "我们做了客服助手，我主要协调知识库接入。"
+      },
+      "expected_status": null,
+      "review_focus": "真实提及知识库接入，追问一次具体协调，不编造效率提升。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "NC02",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你如何解决项目中的困难？",
+        "answer": "法务担心用户隐私，我把字段逐项分级，和研发调整脱敏策略，最终通过内部审核。"
+      },
+      "expected_status": "clear",
+      "review_focus": "非量化结果也可 clear；不强求虚构数字，不空泛夸奖。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "NC03",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "请做一个自我介绍。",
+        "answer": "我做过三年客服产品，转岗后在做 AI 知识库，目前希望继续负责客服场景的需求分析。"
+      },
+      "expected_status": null,
+      "review_focus": "回应客服与转岗背景；针对岗位证据提一个自然问题。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "74c5b5c523043dd05920c7d5a80dd2e14b6cc5b04dbad5f46b32d956564620fe",
+      "after_prompt_sha256": "f066ef9925088326f6941029fedc8021b3a083a734bcc3a3e1ade67117562a1b",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "NC04",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你如何衡量项目效果？",
+        "answer": "没有拿到完整的线上数据，但我看过两次用户访谈记录。"
+      },
+      "expected_status": null,
+      "review_focus": "承认数据边界，追问访谈中的实际证据，不编造指标。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "NC05",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责需求分析、产品设计、跨团队协作和效果验证。",
+        "resume": "",
+        "question": "你在项目中负责什么？",
+        "answer": "我只参与了交互评审，方案和上线是同事负责的。"
+      },
+      "expected_status": null,
+      "review_focus": "不扩大个人贡献，追问评审中的具体发现，不给标准答案。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "6fafa9dc93f1ab69a4e672dc30326e7f23e715f8d6aaff7ef9c0342130f969e3",
+      "after_prompt_sha256": "cd9a59d2b2ff753b73055c91f2df59bbe08a121e9176b208de2471ea3c70c873",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "GROWTH-summary",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责用户需求分析、MVP取舍、产品方案与效果验证。",
+        "resume": "",
+        "question": "请介绍一个你负责的项目。",
+        "answer": "Growth Copilot 面向早期知识型创作者，解决内容决策痛点。MVP 聚焦下一篇内容选题，包含账号诊断、内容研究、智能选题与内容生成，采用 Evidence First、Fact/Hypothesis 隔离和 Bad Case 回归测试。V0.1 完成核心工作流验证，真实用户测试计划后续开展。"
+      },
+      "expected_status": null,
+      "review_focus": "比较个人贡献、决策依据、用户价值联系、成果边界；个人职责未明时可先问本人一次行动；不锁定唯一正确追问。",
+      "provenance": "根据用户提供要点整理的回归输入，不是完整录音逐字稿。",
+      "before_prompt_sha256": "511f8b53d89dc0d39e74c6f2fc70e3b7a22ed31bfcccf2189e864c25ea89a331",
+      "after_prompt_sha256": "fa9e280bf4ee9b0c9b67decde7e7e7c9162e88d90242e30159bcb47ae23bb93d",
+      "before_output": {
+        "source": "用户提供的历史片段；整理输入并非原始逐字稿，不构成配对基准",
+        "partial": true,
+        "output": {
+          "main_issue": "AI 工作流或证据溯源方案缺少一个具体决策点的选择依据。",
+          "guiding_question": "在证据溯源这个设计上，你当时为什么选择这种方案而不是更简单的做法？"
+        }
+      },
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "GROWTH-owned",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责用户需求分析、产品方案与质量验证。",
+        "resume": "",
+        "question": "请介绍一个你负责的项目。",
+        "answer": "Growth Copilot 面向早期知识型创作者，解决内容决策痛点。MVP 聚焦下一篇内容选题，包含账号诊断、内容研究、智能选题与内容生成，采用 Evidence First、Fact/Hypothesis 隔离和 Bad Case 回归测试。V0.1 完成核心工作流验证，真实用户测试计划后续开展。我独立负责需求访谈、MVP范围和工作流设计。创作者反馈素材真假混杂，所以我将事实和待验证假设分开，缺少来源时不把假设当事实输出。我用伪造来源的Bad Case检查，发现来源缺失时系统会提示待核实；目前只能证明内部流程可用。"
+      },
+      "expected_status": null,
+      "review_focus": "个人贡献、需求联系与内部验证已展开；允许 clear，不索要未发生的用户收益。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "511f8b53d89dc0d39e74c6f2fc70e3b7a22ed31bfcccf2189e864c25ea89a331",
+      "after_prompt_sha256": "fa9e280bf4ee9b0c9b67decde7e7e7c9162e88d90242e30159bcb47ae23bb93d",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "GROWTH-technical",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责AI方案架构、方案选型与技术取舍评估。",
+        "resume": "",
+        "question": "请介绍一个你负责的项目。",
+        "answer": "Growth Copilot 面向早期知识型创作者，解决内容决策痛点。MVP 聚焦下一篇内容选题，包含账号诊断、内容研究、智能选题与内容生成，采用 Evidence First、Fact/Hypothesis 隔离和 Bad Case 回归测试。V0.1 完成核心工作流验证，真实用户测试计划后续开展。我负责 AI 工作流架构，决定采用 Evidence First 和事实假设隔离，但尚未展开选择依据。"
+      },
+      "expected_status": null,
+      "review_focus": "JD强调方案选择且个人职责明确，选择依据可能是合理优先缺口；不预设存在更简单方案。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "511f8b53d89dc0d39e74c6f2fc70e3b7a22ed31bfcccf2189e864c25ea89a331",
+      "after_prompt_sha256": "fa9e280bf4ee9b0c9b67decde7e7e7c9162e88d90242e30159bcb47ae23bb93d",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "INTRO-fit",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "负责知识库需求分析和产品验证。",
+        "resume": "",
+        "question": "请做一个自我介绍。",
+        "answer": "我做过两年客服产品，负责需求分析。客服反馈答案找不到出处时，我设计来源链接和原文片段，内部试用中客服可直接核对。这次想应聘知识库产品岗位。"
+      },
+      "expected_status": null,
+      "review_focus": "匹配度、实例、逻辑已支持简洁介绍，可 clear，不强求完整项目故事。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "74c5b5c523043dd05920c7d5a80dd2e14b6cc5b04dbad5f46b32d956564620fe",
+      "after_prompt_sha256": "f066ef9925088326f6941029fedc8021b3a083a734bcc3a3e1ade67117562a1b",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "PRO-debate",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "理解AI知识库方案与适用条件。",
+        "resume": "",
+        "question": "请回答一个与目标岗位相关的专业问题。",
+        "answer": "问题：知识库问答是否都应该使用检索增强？我的观点是不一定，知识稳定且上下文能容纳全部材料时可先直接提供材料，更新频繁或材料过长时再评估检索。选择依赖知识更新频率和上下文成本。"
+      },
+      "expected_status": null,
+      "review_focus": "有条件的合理观点不判错；不要求个人经历或上线数字；若论据足够可 clear。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "5c8481aebeba121d7dd12aced1bc6bc31bedcc7d4e63d6c42fda84a076501a9b",
+      "after_prompt_sha256": "6285d3e9fa204fca21a5b14a335d1f850297026c103633c833463d86e196879c",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "PRO-fact",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "理解检索评估指标。",
+        "resume": "",
+        "question": "请回答一个与目标岗位相关的专业问题。",
+        "answer": "问题：召回率是什么？召回率就是检索到的相关文档占检索到的所有文档的比例。"
+      },
+      "expected_status": null,
+      "review_focus": "可指出将召回率与精确率混淆，聚焦分母；不生成完整正确答案，不延伸到个人贡献。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "5c8481aebeba121d7dd12aced1bc6bc31bedcc7d4e63d6c42fda84a076501a9b",
+      "after_prompt_sha256": "6285d3e9fa204fca21a5b14a335d1f850297026c103633c833463d86e196879c",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "PRO-offtopic",
+      "input": {
+        "job_title": "AI 产品经理",
+        "job_description": "理解检索评估。",
+        "resume": "",
+        "question": "请回答一个与目标岗位相关的专业问题。",
+        "answer": "问题：如何评估知识库检索？我很喜欢贵公司的文化，也愿意努力学习。"
+      },
+      "expected_status": null,
+      "review_focus": "优先指出未回答评估问题，不先抓术语细节；追问一个观点。",
+      "provenance": "本地回归案例",
+      "before_prompt_sha256": "5c8481aebeba121d7dd12aced1bc6bc31bedcc7d4e63d6c42fda84a076501a9b",
+      "after_prompt_sha256": "6285d3e9fa204fca21a5b14a335d1f850297026c103633c833463d86e196879c",
+      "before_output": null,
+      "after_output": null,
+      "execution": "NOT_RUN_NO_PAID_API_AUTHORIZATION",
+      "human_review": {
+        "status": "PENDING",
+        "factual_consistency": null,
+        "priority_selection": null,
+        "followup_specificity": null,
+        "naturalness": null,
+        "clear_when_sufficient": null,
+        "no_full_essay": null,
+        "notes": ""
+      }
+    }
+  ]
+}

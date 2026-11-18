@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "job_title",
+    "job_description",
+    "resume",
+    "question",
+    "answer",
+    "guiding_question",
+    "supplement"
+  ],
+  "properties": {
+    "job_title": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "job_description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000,
+      "pattern": "\\S"
+    },
+    "resume": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "\\S"
+    },
+    "answer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000,
+      "pattern": "\\S"
+    },
+    "guiding_question": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "supplement": {
+      "type": "string",
+      "maxLength": 16000
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "guiding_question": {
+            "type": "string"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "supplement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16000,
+            "pattern": "\\S"
+          }
+        }
+      }
+    }
+  ]
+}
