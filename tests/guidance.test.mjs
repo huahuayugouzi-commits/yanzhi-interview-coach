@@ -37,7 +37,7 @@ test('mock model guidance uses dedicated schema, first answer and supplement wit
   assert.match(body.messages[0].content,/不替用户写完整答案/);assert.match(body.messages[0].content,/framework/);
   return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify(output)}}]}));
  }});assert.deepEqual(result,output);
- const first=messages('diagnose',input,{} )[0].content;assert.match(first,/首次诊断只给反馈与一个追问/);
+ const first=messages('diagnose',input,{} )[0].content;assert.match(first,/首次诊断只给反馈与必要时的一个追问/);
  assert(!messages('guidance',input,guidanceSchema)[0].content.includes('本轮是二次对比'));
 });
 

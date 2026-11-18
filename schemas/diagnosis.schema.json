@@ -118,6 +118,16 @@
         "maxLength": 30,
         "pattern": "\\S"
       }
+    },
+    "expression_advice": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200,
+        "pattern": "\\S"
+      }
     }
   },
   "allOf": [
@@ -171,12 +181,54 @@
             "minLength": 1,
             "maxLength": 1000,
             "pattern": "\\S"
-          },
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "insufficient"
+          }
+        }
+      },
+      "then": {
+        "properties": {
           "guiding_question": {
             "type": "string",
             "minLength": 1,
             "maxLength": 300,
             "pattern": "\\S"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "needs_retry"
+          },
+          "guiding_question": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "expression_advice"
+        ],
+        "properties": {
+          "expression_advice": {
+            "minItems": 1
+          },
+          "evidence_assessment": {
+            "properties": {
+              "level": {
+                "const": "sufficient"
+              }
+            }
           }
         }
       }
