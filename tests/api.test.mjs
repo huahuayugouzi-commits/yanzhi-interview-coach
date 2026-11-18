@@ -31,3 +31,17 @@ test('oversized audio upload rejected before ASR',async t=>{const base=await ser
 test('golden and natural fixtures contain all requested cases (not a model evaluation)',async()=>{const golden=JSON.parse(await fs.readFile(new URL('./golden.json',import.meta.url)));const natural=JSON.parse(await fs.readFile(new URL('./natural.json',import.meta.url)));assert.equal(golden.length,10);assert.equal(natural.length,5);assert.equal(golden.find(x=>x.id==='TC06').expected_status,'clear');assert.equal(golden.find(x=>x.id==='TC08').expected_status,'insufficient');for(const x of [...golden,...natural])assert(x.question&&x.answer);});
 
 test('evidence diagnosis requires focus, impact and supported retry; clear requires sufficient evidence',()=>{for(const key of ['capability_focus','evidence_assessment','issue_impact']){const v={...valid};delete v[key];assert.equal(validateDiagnosis(v),false);}assert.throws(()=>validateOutput('diagnose',{...valid,issue_impact:null},input),{code:'INVALID_MODEL_OUTPUT'});assert.equal(validateDiagnosis({...valid,status:'clear',main_issue:null,guiding_question:null,issue_impact:null,retry_hints:[]}),false);});
+
+test('all three scenes pass input contracts and consistent diagnostic/comparison focus without paid calls',async()=>{
+ for(const [question,focus] of [['请做一个自我介绍。','重点、逻辑、岗位匹配度'],['请介绍一个你负责的项目。','背景、个人贡献、关键决策、成果'],['请回答一个与目标岗位相关的专业问题。','观点、专业理解、推理逻辑、论据']]){
+  for(const kind of ['diagnose','compare']){
+   const data=kind==='diagnose'?{...input,question}:{...input,question,second_answer:'我梳理字段',guiding_question:'依据是什么？'};
+   const out=kind==='diagnose'?valid:comparison;
+   await model(kind,data,{config,fetcher:async(_url,options)=>{const body=JSON.parse(options.body);assert.match(body.messages[0].content,new RegExp(focus));assert.deepEqual(JSON.parse(body.messages[1].content),data);return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify(out)}}]}));}});
+  }
+ }
+ const professional=messages('diagnose',{...input,question:'请回答一个与目标岗位相关的专业问题。'},{} )[0].content;
+ assert.match(professional,/不要求个人项目、个人贡献、上线成果或 STAR/);
+ assert.match(professional,/先只追问具体问题/);
+ assert.match(professional,/禁止提供完整标准答案/);
+});

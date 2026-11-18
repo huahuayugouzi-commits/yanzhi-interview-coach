@@ -10,4 +10,24 @@ test('browser recording stop/re-record, mock ASR editable text; no real ASR acce
 test('real trial access rejects wrong code, accepts correct code and persists within tab',async({page})=>{await page.goto('http://127.0.0.1:3004');await page.getByLabel('试用口令').fill('wrong-code');await page.getByRole('button',{name:'进入训练'}).click();await expect(page.getByRole('alert')).toContainText('正确');await page.getByLabel('试用口令').fill('trial-test-code');await page.getByRole('button',{name:'进入训练'}).click();await expect(page.getByLabel('岗位描述 JD')).toBeVisible();await page.reload();await expect(page.getByLabel('岗位描述 JD')).toBeVisible();});
 test('Mock transport failure can retry without losing answer',async({page})=>{let count=0;await page.route('**/api/diagnose',r=>++count===1?r.fulfill({status:502,json:{error:{message:'测试服务暂时不可用'}}}):r.fulfill({json:diagnosis}));await prepare(page);await page.getByLabel('回答内容').fill(first);await page.getByRole('button',{name:'提交 AI 诊断'}).click();await expect(page.getByRole('alert')).toContainText('测试服务暂时不可用');await expect(page.getByLabel('回答内容')).toHaveValue(first);await page.getByRole('button',{name:'提交 AI 诊断'}).click();await expect(page.getByText(diagnosis.guiding_question)).toBeVisible();});
 
-test('behavior topics are selectable and exact question reaches diagnosis API',async({page})=>{await page.goto('/');await page.getByLabel('岗位描述 JD').fill('产品设计与跨团队协作');for(const label of ['方案取舍','失败复盘','协作分歧']){await page.getByRole('radio',{name:new RegExp(label)}).check();await expect(page.getByRole('radio',{name:new RegExp(label)})).toBeChecked();}await page.getByRole('radio',{name:/方案取舍/}).check();await page.screenshot({path:'test-results/'+test.info().project.name+'-behavior-topics.png',fullPage:true});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.route('**/api/diagnose',r=>{expect(r.request().postDataJSON().question).toBe('请讲一次你在项目中做方案取舍的经历。');return r.fulfill({json:diagnosis});});await page.getByRole('button',{name:'开始训练'}).click();await expect(page.getByRole('heading',{name:'请讲一次你在项目中做方案取舍的经历。'})).toBeVisible();await page.getByLabel('回答内容').fill(first);await page.getByRole('button',{name:'提交 AI 诊断'}).click();await expect(page.getByText(diagnosis.guiding_question)).toBeVisible();});
+for(const [label,description,question] of [
+ ['自我介绍','介绍个人背景、核心优势与岗位匹配度。','请做一个自我介绍。'],
+ ['项目与方案介绍','介绍项目背景、解决方案、个人贡献与成果。','请介绍一个你负责的项目。'],
+ ['专业问题回答','回答岗位相关问题，展示专业理解与逻辑思考。','请回答一个与目标岗位相关的专业问题。']])test('training scene full loop: '+label,async({page})=>{
+ await page.goto('/');await expect(page.getByRole('radio')).toHaveCount(3);
+ await page.getByLabel('岗位描述 JD').fill('产品设计与专业分析');
+ await page.getByRole('radio',{name:new RegExp(label)}).check();
+ await expect(page.getByText(description,{exact:true})).toBeVisible();
+ await expect(page.locator('.question-option.selected')).toContainText(label);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+ await page.screenshot({path:'test-results/'+test.info().project.name+'-three-scenes-'+label+'.png',fullPage:true});
+ await page.route('**/api/diagnose',r=>{expect(r.request().postDataJSON().question).toBe(question);return r.fulfill({json:diagnosis});});
+ await page.route('**/api/compare',r=>{expect(r.request().postDataJSON().question).toBe(question);expect(r.request().postDataJSON().guiding_question).toBe(diagnosis.guiding_question);return r.fulfill({json:{status:'improved',clearer_information:['补充了依据'],capability_evidence:{assessment:'more_complete',explanation:'原缺口已解决。',first_quote:'协调知识库接入',second_quote:'补充依据'},remaining_improvement:null}});});
+ await page.getByRole('button',{name:'开始训练'}).click();await expect(page.getByRole('heading',{name:question})).toBeVisible();
+ await page.getByLabel('回答内容').fill(first);await page.getByRole('button',{name:'提交 AI 诊断'}).click();await expect(page.getByText(diagnosis.guiding_question)).toBeVisible();
+ await page.getByRole('button',{name:'带着这个问题，再说一次'}).click();await page.getByLabel('回答内容').fill('补充依据');await page.getByRole('button',{name:'查看前后对比'}).click();await expect(page.getByText('原缺口已解决。')).toBeVisible();
+});
+test('removed topic in saved draft falls back to visible project scene',async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem('interview-coach-draft-v1',JSON.stringify({job_title:'',job_description:'产品岗位',resume:'',question:'请讲一次失败的经历，以及你从中学到了什么。',answer:'保留回答',second_answer:''})));
+ await page.goto('/');await expect(page.getByRole('radio',{name:/项目与方案介绍/})).toBeChecked();await page.getByRole('button',{name:'开始训练'}).click();await expect(page.getByLabel('回答内容')).toHaveValue('保留回答');
+});
