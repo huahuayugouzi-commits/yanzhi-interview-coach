@@ -88,3 +88,20 @@ test('public home explains product and leads to existing training',async({page})
 test('home is public while training keeps trial-code protection',async({page})=>{
  await page.goto('http://127.0.0.1:3004/');await expect(page.getByRole('heading',{name:/让真实经历，\s*成为清楚的优势。/})).toBeVisible();await expect(page.getByLabel('试用口令')).toHaveCount(0);await page.getByRole('link',{name:'开始一次训练'}).click();await expect(page.getByLabel('试用口令')).toBeVisible();await expect(page.getByLabel('岗位描述 JD')).toHaveCount(0);
 });
+
+async function accountLogin(page:any,email='one@example.test',password='test-password'){
+ await page.getByLabel('邮箱账号').fill(email);await page.getByLabel('密码',{exact:true}).fill(password);await page.getByRole('button',{name:'登录并进入训练'}).click();
+}
+test('account login: homepage public, wrong password rejected, cookie reload and logout protected',async({page,context})=>{
+ await page.goto('http://127.0.0.1:3005/');await page.getByRole('link',{name:'开始一次训练'}).click();await expect(page.getByLabel('邮箱账号')).toBeVisible();await expect(page.getByLabel('岗位描述 JD')).toHaveCount(0);expect((await context.cookies()).length).toBe(0);
+ await accountLogin(page,'one@example.test','wrong');await expect(page.getByRole('alert')).toContainText('邮箱或密码不正确');await expect(page.getByLabel('岗位描述 JD')).toHaveCount(0);
+ await accountLogin(page);await expect(page.getByLabel('岗位描述 JD')).toBeVisible();await expect(page.getByRole('button',{name:'退出登录'})).toBeVisible();const cookies=await context.cookies();expect(cookies.find(c=>c.name==='coach_session')?.httpOnly).toBeTruthy();expect(cookies.find(c=>c.name==='coach_session')?.sameSite).toBe('Strict');
+ await page.getByLabel('岗位描述 JD').fill('这个账号的岗位需求');await page.reload();await expect(page.getByLabel('岗位描述 JD')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+ await page.getByRole('button',{name:'退出登录'}).click();await expect(page.getByLabel('邮箱账号')).toBeVisible();await page.screenshot({path:'test-results/'+test.info().project.name+'-account-login.png',fullPage:true});expect((await context.cookies()).find(c=>c.name==='coach_session')).toBeUndefined();await page.reload();await expect(page.getByLabel('邮箱账号')).toBeVisible();
+});
+test('account drafts isolate identities; expiry allows same-account continuation without leaking to next user',async({page,context})=>{
+ await page.goto('http://127.0.0.1:3005/train');await accountLogin(page);await page.getByLabel('岗位描述 JD').fill('账号A的私人岗位');await page.getByLabel('在这台设备保存文字草稿').check();await page.getByRole('button',{name:'开始训练'}).click();await page.getByLabel('回答内容').fill('这是账号A未提交的私人回答。');
+ await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('interview-coach-draft-v1:user-a')||'{}').answer)).toBe('这是账号A未提交的私人回答。');
+ await context.clearCookies();await page.getByRole('button',{name:'提交 AI 诊断'}).click();await expect(page.getByLabel('邮箱账号')).toBeVisible();await accountLogin(page);await expect(page.getByLabel('回答内容')).toHaveValue('这是账号A未提交的私人回答。');
+ await context.clearCookies();await page.getByRole('button',{name:'提交 AI 诊断'}).click();await expect(page.getByLabel('邮箱账号')).toBeVisible();await accountLogin(page,'two@example.test');await expect(page.getByLabel('岗位描述 JD')).toHaveValue('');await expect(page.getByText('这是账号A未提交的私人回答。',{exact:true})).toHaveCount(0);await page.getByRole('button',{name:'退出登录'}).click();await accountLogin(page);await expect(page.getByLabel('岗位描述 JD')).toHaveValue('账号A的私人岗位');await page.getByRole('button',{name:'退出登录'}).click();await expect(page.getByLabel('邮箱账号')).toBeVisible();await expect.poll(()=>page.evaluate(()=>localStorage.getItem('interview-coach-draft-v1:user-a'))).toBeNull();
+});

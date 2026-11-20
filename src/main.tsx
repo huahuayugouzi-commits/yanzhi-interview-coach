@@ -5,4 +5,5 @@ import Home from './Home';
 import './styles.css';
 import './soft-os.css';
 import './home.css';
+import './accounts.css';
 createRoot(document.getElementById('root')!).render(<React.StrictMode>{window.location.pathname.replace(/\/+$/,'')==='/train'?<App/>:<Home/>}</React.StrictMode>);

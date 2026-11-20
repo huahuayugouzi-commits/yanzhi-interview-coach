@@ -102,6 +102,6 @@ npx --yes pnpm@11.25.0 run test:live
 
 ## 部署材料
 
-当前没有线上服务。render.yaml 明确免费计划且关闭自动部署；部署需另行授权，不能上传 `.env`。生产必须 HTTPS，ACCESS_CODE 至少 12 字符。默认每 IP 每小时 20 次、单实例每 UTC 日 100 次；内存计数重启会重置，不是账单硬上限。模型格式不合规时最多额外请求一次。详见 docs/deploy-render.md。
+现有 Render 服务地址为 https://yanzhi-interview-coach.onrender.com/ 。render.yaml 明确免费计划且关闭自动部署，不能上传 `.env`。生产必须 HTTPS。`AUTH_MODE=code` 要求 ACCESS_CODE 至少 12 字符；`AUTH_MODE=supabase` 使用邮箱密码登录，必须配置 SUPABASE_URL 和 SUPABASE_PUBLISHABLE_KEY（publishable/anon，不使用 service_role）。账号版是否已生效以线上 `/api/health` 的 auth_mode 与实际登录验收为准。默认每 IP（账号模式同时按账号）每小时 20 次、单实例每 UTC 日 100 次；内存计数重启会重置，不是账单硬上限。模型格式不合规时最多额外请求一次。配置与账号管理步骤见 docs/deploy-render.md。
 
 开源参考与许可证见 docs/third-party-review.md。
