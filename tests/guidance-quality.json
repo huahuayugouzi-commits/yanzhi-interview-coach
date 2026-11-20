@@ -1,0 +1,287 @@
+[
+  {
+    "id": "GQ01",
+    "type": "局部补强",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、方案设计与质量验证。",
+      "resume": "",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "Growth Copilot面向早期知识型创作者，解决下一篇发什么的问题。我负责需求访谈、MVP范围和工作流设计，将范围聚焦选题决策。方案包括账号诊断和内容研究，并区分事实与假设。V0.1完成内部流程验证和自动化回归，真实用户测试尚未开始。",
+      "guiding_question": "Bad Case回归里实际发现的一个输出问题是什么？",
+      "supplement": "模型把目标受众可能遇到的困难，编造成创作者自己的第一人称工作经历。我分析是受众痛点与创作者真实经历被混淆，JSON格式正确不代表事实正确。我增加Prompt事实约束、程序校验和人工确认，并用真实模型复测及Bad Case回归验证。"
+    },
+    "before": {
+      "source": "用户描述的旧输出片段，未取得对应完整响应",
+      "framework": [
+        "补充中的幻觉问题——表现、原因、修复策略与验证结果"
+      ],
+      "keywords": null,
+      "reminder": null
+    },
+    "candidate": {
+      "framework": [
+        "嵌入原介绍的质量验证部分",
+        "受众困难误写为本人经历→事实归属混淆",
+        "Prompt事实约束＋程序校验＋人工确认→真实模型复测及回归"
+      ],
+      "keywords": [
+        "事实归属混淆",
+        "Prompt约束与程序校验",
+        "真实模型复测"
+      ],
+      "reminder": "保留原结构，在质量验证处补上这一个Bad Case，再衔接回原有阶段成果，不重讲全部项目背景。",
+      "supporting_quotes": [
+        {
+          "source": "answer",
+          "quote": "V0.1完成内部流程验证和自动化回归"
+        },
+        {
+          "source": "supplement",
+          "quote": "模型把目标受众可能遇到的困难，编造成创作者自己的第一人称工作经历。"
+        },
+        {
+          "source": "supplement",
+          "quote": "我增加Prompt事实约束、程序校验和人工确认，并用真实模型复测及Bad Case回归验证。"
+        }
+      ]
+    },
+    "review": "局部嵌入，保留原整体结构；具体错误与动作可回忆，不把复测编成全部问题解决。",
+    "candidate_source": "人工编写的规则验收候选，不是模型输出",
+    "real_model_review": "PENDING"
+  },
+  {
+    "id": "GQ02",
+    "type": "整体重组",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、方案设计与质量验证。",
+      "resume": "",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "后来回归过了，之前我改过需求。最初用户不知道选什么。中间因为时间短缩了范围。其实我还负责访谈。",
+      "guiding_question": "能按发生顺序讲清这段项目经历吗？",
+      "supplement": "我先访谈创作者，发现选题困难，再把MVP缩到下一篇选题，随后设计工作流并做回归。"
+    },
+    "candidate": {
+      "framework": [
+        "访谈创作者→发现选题困难",
+        "开发时间短→MVP缩到下一篇选题",
+        "设计工作流→回归"
+      ],
+      "keywords": [
+        "创作者访谈",
+        "缩小MVP范围",
+        "工作流回归"
+      ],
+      "reminder": "把前后跳跃的内容按访谈、范围选择、工作流验证重组，合并重复背景，不补未说明的用户收益。",
+      "supporting_quotes": [
+        {
+          "source": "answer",
+          "quote": "中间因为时间短缩了范围。"
+        },
+        {
+          "source": "supplement",
+          "quote": "我先访谈创作者，发现选题困难，再把MVP缩到下一篇选题，随后设计工作流并做回归。"
+        }
+      ]
+    },
+    "review": "存在明确顺序混乱才整体重组，不机械套完整STAR。",
+    "before": null,
+    "candidate_source": "人工编写的规则验收候选，不是模型输出",
+    "real_model_review": "PENDING"
+  },
+  {
+    "id": "GQ03",
+    "type": "补充不足",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、方案设计与质量验证。",
+      "resume": "",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "我负责知识库接入。",
+      "guiding_question": "你亲自解决过什么接入问题？",
+      "supplement": "我只记得当时有问题，具体细节还需要核实。"
+    },
+    "candidate": {
+      "framework": [
+        "保留知识库接入职责",
+        "具体问题与个人动作：待核实"
+      ],
+      "keywords": [
+        "知识库接入",
+        "细节待核实"
+      ],
+      "reminder": "保留原来明确的职责，对接入问题如实说明待核实，不补写原因、修复或测试结果。",
+      "supporting_quotes": [
+        {
+          "source": "answer",
+          "quote": "我负责知识库接入。"
+        },
+        {
+          "source": "supplement",
+          "quote": "具体细节还需要核实。"
+        }
+      ]
+    },
+    "review": "不把模糊补充扩成权限问题、修复动作或成功结果。",
+    "before": null,
+    "candidate_source": "人工编写的规则验收候选，不是模型输出",
+    "real_model_review": "PENDING"
+  },
+  {
+    "id": "GQ04",
+    "type": "信息矛盾",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、方案设计与质量验证。",
+      "resume": "",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "这个模块由我独立完成开发并上线。",
+      "guiding_question": "你在模块开发中具体承担了什么？",
+      "supplement": "开发和上线其实都是研发负责，我只参加了评审。"
+    },
+    "candidate": {
+      "framework": [
+        "原答：独立开发上线",
+        "补充：研发开发上线，本人仅评审",
+        "本人职责边界：待核实"
+      ],
+      "keywords": [
+        "开发归属待核实",
+        "本人评审范围"
+      ],
+      "reminder": "先核实独立开发与仅参加评审的冲突，保留两种说法的来源，不把其中一方当作已确认事实。",
+      "supporting_quotes": [
+        {
+          "source": "answer",
+          "quote": "这个模块由我独立完成开发并上线。"
+        },
+        {
+          "source": "supplement",
+          "quote": "开发和上线其实都是研发负责，我只参加了评审。"
+        }
+      ]
+    },
+    "review": "不得默认补充为真，不能编造不同阶段来消除矛盾。",
+    "before": null,
+    "candidate_source": "人工编写的规则验收候选，不是模型输出",
+    "real_model_review": "PENDING"
+  },
+  {
+    "id": "GQ05",
+    "type": "单题深入",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、方案设计与质量验证。",
+      "resume": "",
+      "question": "请回答一个与目标岗位相关的专业问题。",
+      "answer": "问题：怎样降低无来源答案的风险？我认为不能只依赖JSON格式约束。",
+      "guiding_question": "你会用什么检查补足格式约束？",
+      "supplement": "我会检查结论是否有对应来源。没有来源的内容标成待核实，不直接当事实。"
+    },
+    "candidate": {
+      "framework": [
+        "观点：JSON格式不保证来源可信",
+        "检查结论对应来源",
+        "无来源标记待核实"
+      ],
+      "keywords": [
+        "结论对应来源",
+        "无来源待核实"
+      ],
+      "reminder": "只围绕格式约束与来源检查衔接观点和措施，不扩展项目背景，也不把“我会”说成已经验证有效。",
+      "supporting_quotes": [
+        {
+          "source": "answer",
+          "quote": "我认为不能只依赖JSON格式约束。"
+        },
+        {
+          "source": "supplement",
+          "quote": "没有来源的内容标成待核实，不直接当事实。"
+        }
+      ]
+    },
+    "review": "专业题不扩成项目介绍，建议方案不伪装亲历成果。",
+    "before": null,
+    "candidate_source": "人工编写的规则验收候选，不是模型输出",
+    "real_model_review": "PENDING"
+  },
+  {
+    "id": "GQ06",
+    "type": "自我介绍局部补强",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、方案设计与质量验证。",
+      "resume": "",
+      "question": "请做一个自我介绍。",
+      "answer": "我做了两年客服产品，希望应聘知识库产品岗位，优势是理解一线需求。",
+      "guiding_question": "能补一个你理解一线需求的真实例子吗？",
+      "supplement": "客服反馈答案找不到出处，我在答案下加原文链接，内部试用时客服能点击核对。"
+    },
+    "candidate": {
+      "framework": [
+        "保留客服产品背景与岗位意向",
+        "在需求理解优势后嵌入：找不到出处→原文链接→内部核对"
+      ],
+      "keywords": [
+        "客服找不到出处",
+        "原文链接",
+        "内部点击核对"
+      ],
+      "reminder": "保留原自我介绍，在优势后补这一件小事，再接回岗位匹配，不必重讲完整项目过程。",
+      "supporting_quotes": [
+        {
+          "source": "answer",
+          "quote": "优势是理解一线需求。"
+        },
+        {
+          "source": "supplement",
+          "quote": "客服反馈答案找不到出处，我在答案下加原文链接，内部试用时客服能点击核对。"
+        }
+      ]
+    },
+    "review": "围绕岗位能力举证，不强制STAR或添加数字。",
+    "before": null,
+    "candidate_source": "人工编写的规则验收候选，不是模型输出",
+    "real_model_review": "PENDING"
+  },
+  {
+    "id": "GQ07",
+    "type": "充分回答自愿练习",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、方案设计与质量验证。",
+      "resume": "",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "Growth Copilot面向早期知识型创作者，解决下一篇发什么的问题。我负责需求访谈、MVP范围和工作流设计，将范围聚焦选题决策。方案包括账号诊断和内容研究，并区分事实与假设。V0.1完成内部流程验证和自动化回归，真实用户测试尚未开始。",
+      "guiding_question": null,
+      "supplement": ""
+    },
+    "candidate": {
+      "framework": [
+        "可选：先点出选题决策目标",
+        "保留本人工作流设计与内部验证边界"
+      ],
+      "keywords": [
+        "下一篇选题",
+        "工作流设计",
+        "内部验证"
+      ],
+      "reminder": "原回答已清楚，可沿原顺序轻量整理，不增加新素材，保留尚未开展真实用户测试的边界。",
+      "supporting_quotes": [
+        {
+          "source": "answer",
+          "quote": "我负责需求访谈、MVP范围和工作流设计，将范围聚焦选题决策。"
+        },
+        {
+          "source": "answer",
+          "quote": "V0.1完成内部流程验证和自动化回归，真实用户测试尚未开始。"
+        }
+      ]
+    },
+    "review": "提供轻量可选提示，不制造缺点或索要额外证据。",
+    "before": null,
+    "candidate_source": "人工编写的规则验收候选，不是模型输出",
+    "real_model_review": "PENDING"
+  }
+]
