@@ -21,3 +21,7 @@ release/
 docs/evaluation/*.png
 .DS_Store
 Thumbs.db
+# Local interview regression material; never publish personal source answers.
+tests/intro-adaptive.json
+tests/intro-advice.test.mjs
+docs/intro-adaptive-review.md
