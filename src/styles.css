@@ -11,3 +11,10 @@
 .diagnosis-outline .clue-note{font-size:11px;line-height:1.7;color:#9588a7;margin:10px 0 0}
 .diagnosis-gap{margin-top:14px}.diagnosis-gap p{margin:0}
 @media(max-width:700px){.diagnosis-outline{padding:10px 12px;margin-top:12px}.diagnosis-outline h4,.diagnosis-gap h4{font-size:11px}.diagnosis-outline .clue-note{font-size:10px}}
+/* Step navigation keeps progress independent from the viewed page. */
+button.step{width:100%;padding:0;border:0;background:transparent;text-align:left;font:inherit;align-items:flex-start}
+button.step:not(:disabled):hover strong{color:#8068c4;text-decoration:underline;text-underline-offset:4px}
+button.step:not(:disabled){cursor:pointer}
+button.step:disabled{opacity:1;cursor:not-allowed}
+.mobile-step-back{display:none}
+@media(max-width:760px){.mobile-step-back{display:inline-block;margin-bottom:12px}}

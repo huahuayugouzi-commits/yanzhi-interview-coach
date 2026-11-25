@@ -18,6 +18,9 @@ export const diagnosisInputSchema=object(fields);
 export const comparisonInputSchema=object({...fields,second_answer:text(16000),guiding_question:nullable(300)});
 export const guidanceInputSchema={...object({...fields,guiding_question:nullable(300),supplement:{type:'string',maxLength:16000}}),allOf:[{if:{properties:{guiding_question:{type:'string'}}},then:{properties:{supplement:text(16000)}}}]};
 guidanceInputSchema.properties.expression_advice={type:'array',maxItems:3,items:text(200)};
+// Reuse the original diagnosis focus as an optional, bounded training snapshot.
+guidanceInputSchema.properties.capability_focus=text(200);
+comparisonInputSchema.properties.capability_focus=text(200);
 const ajv=new Ajv({allErrors:true,strict:false});
 export const validateDiagnosis=ajv.compile(diagnosisSchema);
 export const validateComparison=ajv.compile(comparisonSchema);
