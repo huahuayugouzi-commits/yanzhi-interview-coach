@@ -154,3 +154,20 @@ test('step navigation preserves completed loop, audio and results without extra 
  page.once('dialog',dialog=>dialog.accept());await page.getByLabel('回答内容').fill('已确认修改的首次回答');await expect(nav.getByRole('button').nth(2)).toBeDisabled();await expect(page.getByText('原有对比保留。')).toHaveCount(0);await expect(page.locator('audio')).toHaveCount(1);expect([diagnoses,guidances,comparisons]).toEqual([1,1,1]);
  await page.screenshot({path:'test-results/'+test.info().project.name+'-step-navigation.png',fullPage:true});
 });
+
+test('skip follow-up from diagnosis preserves first-answer-only guidance, retry and navigation',async({page})=>{
+ let guideCalls=0,compareCalls=0;
+ await page.route('**/api/diagnose',r=>r.fulfill({json:{...diagnosis,expression_advice:['把个人行动前置']}}));
+ await page.route('**/api/guidance',r=>{guideCalls++;const b=r.request().postDataJSON();expect(b.guiding_question).toBeNull();expect(b.supplement).toBe('');expect(b.expression_advice).toEqual(['把个人行动前置']);expect(b.answer).toBe(first);return guideCalls===1?r.fulfill({status:502,json:{error:{message:'合成引导失败'}}}):r.fulfill({json:{framework:['已有知识库接入行动'],keywords:['知识库'],reminder:'仅按已说明事实自然重说。',supporting_quotes:[{source:'answer',quote:first}]}});});
+ await page.route('**/api/compare',r=>{compareCalls++;const b=r.request().postDataJSON();expect(b.guiding_question).toBeNull();expect(b.supplement).toBeUndefined();return r.fulfill({json:{status:'unchanged',clearer_information:[],capability_evidence:{assessment:'unchanged',explanation:'没有虚构已补齐证据。',first_quote:first,second_quote:b.second_answer},remaining_improvement:null}});});
+ await prepare(page);await page.getByLabel('回答内容').fill(first);await page.getByRole('button',{name:'提交 AI 诊断'}).click();await page.getByRole('button',{name:'跳过，直接重说',exact:true}).click();await expect(page.getByRole('alert')).toContainText('合成引导失败');await expect(page.getByLabel('补充内容')).toHaveCount(0);await page.getByRole('button',{name:'重新提炼框架和关键词'}).click();await expect(page.getByText('仅按已说明事实自然重说。')).toBeVisible();await expect(page.getByText(diagnosis.guiding_question,{exact:true})).toHaveCount(0);
+ await page.getByRole('button',{name:'返回诊断'}).click();await expect(page.getByText(diagnosis.guiding_question,{exact:true})).toBeVisible();await page.getByRole('button',{name:'进入自主重说'}).click();expect(guideCalls).toBe(2);await page.getByLabel('回答内容').fill('我协调了知识库接入。');await page.getByRole('button',{name:'查看前后对比'}).click();await expect(page.getByText('没有虚构已补齐证据。')).toBeVisible();expect(compareCalls).toBe(1);
+ await page.screenshot({path:'test-results/'+test.info().project.name+'-skip-followup.png',fullPage:true});
+});
+
+test('skip ignores unsubmitted supplement; answering later resumes original follow-up',async({page})=>{
+ const pending='这段草稿没有提交，跳过时不得当作事实。';let guideCalls=0;
+ await page.route('**/api/diagnose',r=>r.fulfill({json:diagnosis}));
+ await page.route('**/api/guidance',r=>{guideCalls++;const b=r.request().postDataJSON();expect(b.guiding_question).toBe(guideCalls===1?null:diagnosis.guiding_question);expect(b.supplement).toBe(guideCalls===1?'':pending);return r.fulfill({json:{framework:['按真实输入组织'],keywords:['知识库'],reminder:'不要补造信息。',supporting_quotes:[{source:guideCalls===1?'answer':'supplement',quote:guideCalls===1?first:pending}]}});});
+ await prepare(page);await page.getByLabel('回答内容').fill(first);await page.getByRole('button',{name:'提交 AI 诊断'}).click();await page.getByRole('button',{name:'补充这个问题'}).click();await page.getByLabel('补充内容').fill(pending);await page.getByRole('button',{name:'跳过，直接重说',exact:true}).click();await expect(page.getByText('不要补造信息。')).toBeVisible();await page.getByRole('button',{name:'修改补充信息'}).click();await expect(page.getByLabel('补充内容')).toHaveValue(pending);await expect(page.getByText(diagnosis.guiding_question,{exact:true})).toBeVisible();await page.getByRole('button',{name:'提炼框架和关键词'}).click();await expect(page.getByText('不要补造信息。')).toBeVisible();expect(guideCalls).toBe(2);
+});
