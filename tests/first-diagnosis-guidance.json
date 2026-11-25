@@ -1,0 +1,209 @@
+[
+  {
+    "id": "FD01",
+    "name": "自我介绍重复但证据充分",
+    "source": "SYNTHETIC",
+    "real_model_review": "PENDING",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、产品方案和验证。",
+      "resume": "",
+      "question": "请做一个自我介绍。",
+      "answer": "我独立完成检索助手需求与原型，内部审核可核对引用。我能做需求分析，也擅长梳理需求。最后再补充，我负责了引用入口。"
+    },
+    "candidate": {
+      "status": "needs_retry",
+      "heard": "已说明需求与原型、引用入口及内部审核验证。",
+      "capability_focus": "与岗位相关的能力证据",
+      "evidence_assessment": {
+        "level": "sufficient",
+        "reason": "贡献与验证明确，需求能力表述重复。"
+      },
+      "main_issue": "需求能力表述重复，具体引用贡献出现偏后。",
+      "issue_impact": "影响面试官理解这项能力的实际支撑。",
+      "evidence_quote": "我能做需求分析，也擅长梳理需求。",
+      "guiding_question": null,
+      "retry_hints": [],
+      "expression_advice": [
+        "把引用入口及内部审核验证放在检索助手实践之后",
+        "合并两次需求能力表述，保留一个核心优势"
+      ],
+      "evidence_gap": null,
+      "thinking_hints": []
+    }
+  },
+  {
+    "id": "FD02",
+    "name": "自我介绍缺少核心岗位证据",
+    "source": "SYNTHETIC",
+    "real_model_review": "PENDING",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、产品方案和验证。",
+      "resume": "",
+      "question": "请做一个自我介绍。",
+      "answer": "我学习过产品设计课程，需求判断能力很强，希望担任产品经理。"
+    },
+    "candidate": {
+      "status": "needs_retry",
+      "heard": "已说明学习背景与求职目标，需求判断仍是自我评价。",
+      "capability_focus": "与岗位相关的能力证据",
+      "evidence_assessment": {
+        "level": "partial",
+        "reason": "已有相关主张，关键依据待补充。"
+      },
+      "main_issue": "需求判断仍停留在自我评价。",
+      "issue_impact": "影响面试官理解这项能力的实际支撑。",
+      "evidence_quote": "需求判断能力很强",
+      "guiding_question": "能讲一次你亲自确定需求优先级的经历吗？",
+      "retry_hints": [],
+      "expression_advice": [
+        "压缩学习背景，把与岗位相关的真实实践放在优势之后"
+      ],
+      "evidence_gap": "一次本人实际参与的需求优先级判断。",
+      "thinking_hints": [
+        "当时需要解决的用户问题",
+        "你作出判断的依据",
+        "你实际参与的选择"
+      ]
+    }
+  },
+  {
+    "id": "FD03",
+    "name": "项目介绍补充产品决策依据",
+    "source": "SYNTHETIC",
+    "real_model_review": "PENDING",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、产品方案和验证。",
+      "resume": "",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "我负责文档助手，将MVP聚焦检索，没有先重做编辑器。我完成原型，内部走查能查到引用。"
+    },
+    "candidate": {
+      "status": "needs_retry",
+      "heard": "已说明聚焦检索的范围选择、原型贡献和内部引用走查。",
+      "capability_focus": "与岗位相关的能力证据",
+      "evidence_assessment": {
+        "level": "partial",
+        "reason": "已有相关主张，关键依据待补充。"
+      },
+      "main_issue": "已说明聚焦检索的决策，但尚未解释选择依据。",
+      "issue_impact": "影响面试官理解这项能力的实际支撑。",
+      "evidence_quote": "将MVP聚焦检索，没有先重做编辑器",
+      "guiding_question": "你当时优先做检索的主要依据是什么？",
+      "retry_hints": [],
+      "expression_advice": [
+        "保留范围选择与走查成果，把判断依据嵌入MVP取舍处"
+      ],
+      "evidence_gap": "当时支持检索优先的具体需求或限制。",
+      "thinking_hints": [
+        "当时最突出的用户需求",
+        "影响范围选择的实际限制",
+        "支持检索优先的判断依据"
+      ]
+    }
+  },
+  {
+    "id": "FD04",
+    "name": "专业问答补充技术依据",
+    "source": "SYNTHETIC",
+    "real_model_review": "PENDING",
+    "input": {
+      "job_title": "后端工程师",
+      "job_description": "理解缓存一致性、技术方案与权衡。",
+      "resume": "",
+      "question": "请回答一个与目标岗位相关的专业问题。",
+      "answer": "问题是如何减轻缓存数据陈旧。我认为可以缩短TTL，但还没有解释这个选择的依据。"
+    },
+    "candidate": {
+      "status": "needs_retry",
+      "heard": "已直接回答缓存陈旧问题，提出缩短TTL的观点。",
+      "capability_focus": "缓存方案的推理依据与适用条件",
+      "evidence_assessment": {
+        "level": "partial",
+        "reason": "已有相关主张，关键依据待补充。"
+      },
+      "main_issue": "缩短TTL的观点尚未说明适用依据。",
+      "issue_impact": "影响面试官理解这项能力的实际支撑。",
+      "evidence_quote": "可以缩短TTL",
+      "guiding_question": "这个场景中支持缩短TTL的关键依据是什么？",
+      "retry_hints": [],
+      "expression_advice": [
+        "保留直接观点，随后衔接适用依据，不扩展成项目介绍"
+      ],
+      "evidence_gap": "TTL选择与可接受陈旧程度之间的推理。",
+      "thinking_hints": [
+        "可接受的数据陈旧程度",
+        "数据更新频率与TTL的关系",
+        "这一判断成立的条件"
+      ]
+    }
+  },
+  {
+    "id": "FD05",
+    "name": "回答充分无需追问",
+    "source": "SYNTHETIC",
+    "real_model_review": "PENDING",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、产品方案和验证。",
+      "resume": "",
+      "question": "请做一个自我介绍。",
+      "answer": "我负责文档助手需求与原型。访谈发现用户需要核对来源，因此增加引用入口；内部审核可以逐条核对。这些实践对应岗位的需求分析与质量验证。"
+    },
+    "candidate": {
+      "status": "clear",
+      "heard": "已用需求依据、引用入口贡献和内部审核验证说明岗位匹配。",
+      "capability_focus": "与岗位相关的能力证据",
+      "evidence_assessment": {
+        "level": "sufficient",
+        "reason": "优势、个人行动和相应验证清楚且聚焦。"
+      },
+      "main_issue": null,
+      "issue_impact": null,
+      "evidence_quote": "访谈发现用户需要核对来源，因此增加引用入口",
+      "guiding_question": null,
+      "retry_hints": [],
+      "expression_advice": [],
+      "evidence_gap": null,
+      "thinking_hints": []
+    }
+  },
+  {
+    "id": "FD06",
+    "name": "补充和追问共享线索并去重",
+    "source": "SYNTHETIC",
+    "real_model_review": "PENDING",
+    "input": {
+      "job_title": "AI产品经理",
+      "job_description": "需求分析、产品方案和验证。",
+      "resume": "",
+      "question": "请介绍一个你负责的项目。",
+      "answer": "我为文档助手选择先做检索，原型已完成，但选择依据还没展开。"
+    },
+    "candidate": {
+      "status": "needs_retry",
+      "heard": "已说明检索优先决策与原型成果。",
+      "capability_focus": "与岗位相关的能力证据",
+      "evidence_assessment": {
+        "level": "partial",
+        "reason": "已有相关主张，关键依据待补充。"
+      },
+      "main_issue": "关键主张尚缺具体依据。",
+      "issue_impact": "影响面试官理解这项能力的实际支撑。",
+      "evidence_quote": "选择依据还没展开",
+      "guiding_question": "检索优先的主要依据是什么？",
+      "retry_hints": [],
+      "expression_advice": [
+        "保留原项目主线，在检索优先决策之后补上依据"
+      ],
+      "evidence_gap": "支撑检索优先判断的真实需求与限制。",
+      "thinking_hints": [
+        "用户需求与限制",
+        "用户需求 与 限制",
+        "支持这次选择的判断依据"
+      ]
+    }
+  }
+]

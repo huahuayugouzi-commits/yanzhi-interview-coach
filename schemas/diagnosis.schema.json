@@ -128,6 +128,38 @@
         "maxLength": 200,
         "pattern": "\\S"
       }
+    },
+    "evidence_gap": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "thinking_hints": {
+      "type": "array",
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80,
+        "pattern": "^[^?？\\r\\n]*[^\\s?？\\r\\n][^?？\\r\\n]*$"
+      },
+      "anyOf": [
+        {
+          "maxItems": 0
+        },
+        {
+          "minItems": 2
+        }
+      ]
     }
   },
   "allOf": [
@@ -181,6 +213,25 @@
             "minLength": 1,
             "maxLength": 1000,
             "pattern": "\\S"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "guiding_question": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence_gap": {
+            "type": "null"
+          },
+          "thinking_hints": {
+            "maxItems": 0
           }
         }
       }
